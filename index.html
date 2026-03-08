@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LINORIN Changelog</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1a1a2e;--bg2:#16213e;--surface:#0f3460;
+  --fg:#e8e8f0;--muted:#8888aa;--accent:#a48fd8;
+  --border:rgba(255,255,255,0.08);
+  --green:#4caf8a;--yellow:#f0c040;--red:#e94b6e;--blue:#5b9cf6;
+}
+body{background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.7;padding:0 0 60px}
+
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:20px 24px;position:sticky;top:0;z-index:10}
+header h1{font-size:20px;font-weight:700;letter-spacing:.5px}
+header p{font-size:13px;color:var(--muted);margin-top:4px}
+
+.container{max-width:720px;margin:0 auto;padding:0 20px}
+
+.version-block{margin-top:32px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.version-header{
+  background:var(--bg2);padding:14px 20px;
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+}
+.version-num{font-size:18px;font-weight:700;color:var(--accent)}
+.version-date{font-size:13px;color:var(--muted)}
+.version-body{padding:16px 20px;display:flex;flex-direction:column;gap:12px}
+
+.section-title{
+  font-size:13px;font-weight:700;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.8px;margin-top:4px;
+}
+
+ul{padding-left:18px;display:flex;flex-direction:column;gap:6px}
+li{font-size:14px}
+li strong{color:var(--fg)}
+code{
+  background:rgba(255,255,255,0.08);border-radius:4px;
+  padding:1px 5px;font-size:13px;font-family:'SF Mono',Menlo,monospace;
+}
+
+.badge{
+  display:inline-block;font-size:11px;font-weight:700;
+  padding:2px 7px;border-radius:10px;margin-right:4px;vertical-align:middle;
+}
+.badge-fix{background:rgba(233,75,110,.18);color:var(--red)}
+.badge-feat{background:rgba(76,175,138,.18);color:var(--green)}
+.badge-change{background:rgba(164,143,216,.18);color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>LINORIN Changelog</h1>
+    <p>Linked Intelligence Network Orchestrator</p>
+  </header>
+
+  <!-- v1.6.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.6.0</span>
+      <span class="version-date">(2026-03-08)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><strong>セレクト日本語化</strong>: <code>buildFieldHtml</code> のセレクト描画で <code>item.l</code>（日本語ラベル）が無視されていた根本バグを修正。会話モード・通知タイミングなど全フィールドが正しく表示されるように</li>
+        <li><strong>会話モード pre ブロック</strong>: 説明欄の Away / Home / Unified を外出中 / 在宅 / 統合 に日本語化</li>
+        <li><strong>テーマ文字色</strong>: <code>calculateAccentTextColor</code> をアクセント輝度基準→背景色輝度基準に変更。ワインなど暗背景+明アクセントで文字が黒くなる問題を解消</li>
+        <li><strong>アクションボタン</strong>: <code>.act-btn</code> の背景を透明→テーマカラー薄掛けに変更。ライトテーマで枠だけに見える問題を修正</li>
+        <li><strong>フォントサイズ適用</strong>: <code>applyFontSize</code> の全 CSS ルールに <code>!important</code> を追加。inline style による上書きを防止</li>
+        <li><strong>pre フィールド</strong>: テキスト色を <code>var(--muted)</code>→<code>var(--text)</code> に変更、<code>font-weight:600</code> を追加（読みにくい問題を解消）</li>
+        <li><strong>保存ボタンが「保存中」のまま詰まる</strong>: 削除済み要素 <code>f_webui_theme_color</code> の <code>null</code> 参照による TypeError を修正</li>
+      </ul>
+      <div class="section-title">✨ 新機能 / 改善</div>
+      <ul>
+        <li><strong>時間帯設定</strong>: 24 時間を朝/昼/夕方/夜の 4 帯に分けるビジュアルスライダーを追加。境界時刻をドラッグ調整、時間帯ごとにインストラクションを設定可能</li>
+        <li><strong>時間帯システムプロンプト</strong>: <code>getCurrentTimePeriod()</code> を追加。現在時刻に応じた時間帯の指示をシステムプロンプトに自動追記</li>
+        <li><strong>フォントサイズスライダー</strong>: A－/A＋ ボタン→スライダーに変更（<code>width:192px</code>）、8 段階（11〜25px）に拡張</li>
+        <li><strong>アップグレードバナー</strong>: マトリックスグリーン（<code>#020f02</code> / <code>#00ff41</code>）固定デザインに変更。どのテーマでも干渉しない</li>
+        <li><strong>テーマプリセット</strong>: プルダウン化（<code>webui_selected_theme</code>）。ヘッダーの選択と設定フォームを双方向同期</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.5.1 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.5.1</span>
+      <span class="version-date">(2026-03-04〜06)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ 機能追加 / 改善</div>
+      <ul>
+        <li><strong>WebUI カラー設定</strong>: 背景色・AI 吹き出し・ユーザー吹き出し・ヘッダー・入力バー・アクセント色を設定画面から変更可能に</li>
+        <li><strong>フォント拡張</strong>: ヘッダーにフォントファミリー選択（8 種）とサイズ調整を統合</li>
+        <li><strong>詳細設定トグル</strong>: 詳細設定を折りたたんで基本設定だけを表示するトグルを追加</li>
+        <li><strong>ヘルプツールチップ</strong>: 各設定項目にヘルプアイコンを追加</li>
+        <li><strong>レスポンシブアイコン</strong>: モバイル/タブレット向け自動スケーリングアイコン（5 段階）</li>
+        <li><strong>必須設定ハイライト</strong>: 未入力の必須 API キーを自動ハイライト表示</li>
+        <li><strong>UI 構造の見直し</strong>: 頻繁に変更する設定とシステム設定を分離</li>
+      </ul>
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><strong>アップグレードボタン</strong>: スコープ外変数参照の ReferenceError で <code>runSetup()</code> が呼ばれない問題を修正</li>
+        <li><strong>ボタン文字色</strong>: 白 <code>#fff</code>→ソフトグレー <code>#e0e0ec</code>、text-shadow を追加</li>
+        <li><strong>CSS 整合性</strong>: <code>--fg</code>/<code>--bg2</code> 未定義変数を <code>var(--text)</code>/<code>var(--ibg)</code> に修正</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.5.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.5.0</span>
+      <span class="version-date">(2026-03-03)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ チャネル・モード設定</div>
+      <ul>
+        <li><strong>active_mode</strong>: away（LINE 等）/ home（WebUI 等）/ unified（全チャネル統合）の 3 モードを追加</li>
+        <li><strong>mode_instruction</strong>: Away/Home ごとにシステムプロンプト先頭に挿入する状況説明を設定可能</li>
+        <li><strong>channel_instruction</strong>: LINE / Slack / Telegram / WebUI ごとに補足指示を設定可能</li>
+        <li><strong>Unified モード</strong>: 全チャネルの会話履歴を統合参照（72h / 最大 50 件）</li>
+      </ul>
+      <div class="section-title">✨ RAG UI 改善</div>
+      <ul>
+        <li><strong>キーワード直接編集</strong>: RAG エントリをキー・コンテンツの 2 フィールド構成に刷新</li>
+        <li><strong>追加・削除ボタン</strong>: UI からエントリを追加・削除可能、セクション部分再描画に対応</li>
+      </ul>
+      <div class="section-title">✨ その他</div>
+      <ul>
+        <li><strong>WebUI event_queue 統合</strong>: WebUI メッセージを event_queue に記録し監査ログを統一</li>
+        <li><strong>type:'pre' フィールド</strong>: 等幅フォントの ASCII アート表示フィールドを追加</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.4.15 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.4.15</span>
+      <span class="version-date">(2026-03-02)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><strong>pushConversationLog に LockService を追加</strong>: スケジュールトリガーと WebUI の同時書き込みによる競合を防止</li>
+        <li><strong>compressImageToBase64</strong>: 例外発生時に Drive 一時ファイルが残存するバグを <code>finally</code> ブロックで修正</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.4.11〜14 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.4.11〜14</span>
+      <span class="version-date">(2026-03-01〜02)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ チャット UI 改善</div>
+      <ul>
+        <li><strong>フォント選択 8 種</strong>: システム / Noto Sans JP / BIZ UD / M PLUS / 丸ゴシック / クレー / 明朝 / ロック（Google Fonts）</li>
+        <li><strong>アイコンサイズ切替</strong>: 小/中/大をチャット UI の⚙パネルから変更可能（localStorage 保存）</li>
+        <li><strong>バージョン自動検出</strong>: 5 分ごとに稼働バージョンをポーリング、変化があれば更新バナーを表示</li>
+        <li><strong>設定 UI リンク</strong>: チャット UI の⚙パネルから設定画面を開けるボタンを追加</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.4.4〜10 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.4.4〜10</span>
+      <span class="version-date">(2026-03-01)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 アップグレード・設定 UI 安定化</div>
+      <ul>
+        <li><strong>自動アップグレード無限ループ解消</strong>: バナー表示のみに変更し、ユーザーがボタンを押したときだけ実行する方式に</li>
+        <li><strong>LAST_SETUP_VERSION を ScriptProperties に移行</strong>: config シートの読み取りタイミング問題を根本解決</li>
+        <li><strong>SPA 方式リロード</strong>: <code>window.top.location.href</code> の cross-origin ブロック問題を解消。<code>_refreshAndReload()</code> で DOM をその場で書き換え</li>
+        <li><strong>updateModels フロー整理</strong>: 保存 → モデル更新 → <code>_refreshAndReload()</code> の 1 本道に統一</li>
+        <li><strong>Gemini 無料モデルフィルタ</strong>: <code>GEMINI_FREE_TIER_ONLY</code> 設定を追加。Flash / Gemma / Lite 系を無料判定</li>
+        <li><strong>設定 UI コマンドボタン整理</strong>: 今すぐ話しかける・日記生成・モデル更新に絞り込み。その他はデバッグセクションへ</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.3.0〜3.14 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.3.0〜3.14</span>
+      <span class="version-date">(2026-02-27〜03-02)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ WebUI チャット新規追加</div>
+      <ul>
+        <li><strong>chat_ui.html</strong>: LINE/Slack/Telegram 不要でブラウザから会話。iOS/Android モバイルファースト、safe-area 対応</li>
+        <li><strong>localStorage キャッシュ</strong>: 2 回目以降の起動をほぼ即時表示。差分マージで画面ちらつきなし</li>
+        <li><strong>ブラウザ通知</strong>: 新着メッセージ時に Web Notification API で通知・タブバッジ表示</li>
+        <li><strong>固有名詞ハードコード全廃</strong>: <code>CONFIG["partner_name"]</code> / <code>CONFIG["user_name"]</code> を全箇所で使用</li>
+        <li><strong>scheduledEveryMinute() 統合</strong>: processQueue + pollTelegramUpdates + pomodoro の 3 トリガーを 1 つに統合</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.0〜1.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.0〜1.2</span>
+      <span class="version-date">(2026-02-25〜26)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ 初期リリース</div>
+      <ul>
+        <li><strong>LINE / Slack / Telegram 対応</strong>: マルチプラットフォームメッセージ処理</li>
+        <li><strong>Telegram ポーリング方式</strong>: Webhook の GAS cross-origin 問題を解消</li>
+        <li><strong>マルチモーダル</strong>: 画像＋テキスト送信対応（LINE / Slack / Telegram）</li>
+        <li><strong>Slack 二重送信修正</strong>: dedup を CacheService→PropertiesService（永続）に変更</li>
+        <li><strong>メール通知</strong>: realtime / 6h_summary / daily_summary の 3 モードを追加</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
