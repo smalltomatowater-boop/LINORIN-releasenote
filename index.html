@@ -58,6 +58,37 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.7.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.7.0</span>
+      <span class="version-date">(2026-03-09)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ 新機能</div>
+      <ul>
+        <li><strong>RSSフィード</strong>: フィードを最大10件登録。時間帯切り替わりを検知してキャラクターが好きそうな記事を自然に話しかける（時間帯ごとにON/OFF）</li>
+        <li><strong>RSS自動翻訳</strong>: 英語記事を Google 翻訳（<code>LanguageApp</code>）で日本語化。LLMコスト不要</li>
+        <li><strong>RSS話のネタ注入</strong>: ヘッドライン＋概要をシステムプロンプトに差し込み、AIが話題に困った時に自然に使う（Push時・ニュース問いかけキーワード検知時）</li>
+        <li><strong>文脈スコアリング</strong>: バイグラム照合で会話内容に近い記事を優先選択（ON/OFFトグル）</li>
+        <li><strong>日記へのネタ補填</strong>: 会話が少ない日でもRSSネタを日記に織り込み可能</li>
+        <li><strong>チャット画面アップグレードバナー</strong>: デフォルト画面がチャットになったため、チャット側でもバージョン更新を通知</li>
+      </ul>
+      <div class="section-title">🎨 デザイン</div>
+      <ul>
+        <li><strong>グロー／シャドウ演出</strong>: セクションヘッダー・アイコン・入力フォームに光彩エフェクトを追加</li>
+        <li><strong>セクション名刷新</strong>: AIコア／記憶のエンジン／人格・世界観／一日のリズム／距離感と孤独 など感覚的な名称に変更</li>
+        <li><strong>時間帯名称変更</strong>: 夕方→夕方〜夜、夜→深夜（内部キーは変更なし）</li>
+      </ul>
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><strong>OpenAI日記エラー</strong>: 空の user コンテンツを送信していた問題を修正（503/429）</li>
+        <li><strong>設定を開くリンク</strong>: <code>?page=config</code> なしで開いていた問題を修正</li>
+        <li><strong>INTERNAL_VERSION更新通知</strong>: 内部バージョン変化でもアップグレード画面が出るように</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.6.0 -->
   <div class="version-block">
     <div class="version-header">
