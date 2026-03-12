@@ -58,6 +58,30 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.7.1 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.7.1</span>
+      <span class="version-date">(2026-03-12)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🤖 テラリウム（ベータ）</div>
+      <ul>
+        <li><strong>AIテラリウム</strong>: 複数のAIボットがSlackスレッドで自律的に会話を続ける機能をベータとして追加</li>
+        <li><strong>自己返信バグ修正</strong>: ボットが自身のメッセージに返信してしまう問題を修正</li>
+        <li><strong>会話継続強化</strong>: チェーン継続（1トリガーで複数ターン連続返答）と継続確率引き上げにより会話がより長く続くように</li>
+        <li><strong>キャラクター一貫性</strong>: ボット固有の過去発言サンプルをプロンプトに注入</li>
+        <li><strong>パートナーボット修正</strong>: 時間帯・モード・チャンネル設定を正しく反映するように</li>
+        <li><strong>その他バグ修正</strong>: タイムスタンプ精度ズレ・二重ログ記録を修正</li>
+      </ul>
+      <div class="section-title">🐛 LINE Webhook 修正</div>
+      <ul>
+        <li><strong>302タイムアウト解消</strong>: 受信時に即200を返し処理を非同期化。Webhookの安定性が大幅に向上</li>
+        <li><strong>ヘッダー消失対応</strong>: GASリダイレクト時にシグネチャヘッダーが消える問題に対応</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.7.0 -->
   <div class="version-block">
     <div class="version-header">
