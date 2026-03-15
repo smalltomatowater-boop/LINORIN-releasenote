@@ -58,6 +58,107 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.9.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.9.0</span>
+      <span class="version-date">(2026-03-15)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🖥️ 新UI標準化</div>
+      <ul>
+        <li><span class="badge badge-change">change</span><strong>新UIをデフォルトに</strong>: <code>/exec</code> で直接新しいタブ型UIが開くように。旧URLのブックマークも新UIにリダイレクト</li>
+      </ul>
+      <div class="section-title">🎨 テーマ・外観強化</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>カスタムテーマ（1〜3）</strong>: ユーザーが独自の配色を最大3パターン保存・呼び出せるカスタムプリセットスロットを追加</li>
+        <li><span class="badge badge-fix">fix</span><strong>ライトテーマ対応</strong>: シュガーなどのライトテーマで設定UIの文字・ボーダーが消える問題を修正</li>
+        <li><span class="badge badge-fix">fix</span><strong>テーマプレビュー修正</strong>: テーマ選択でリアルタイムプレビューが反映されなかった問題を修正</li>
+      </ul>
+      <div class="section-title">🔔 アップグレードフロー改善</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>アップグレードバッジ</strong>: 設定タブのアイコンに赤丸バッジでアップデートを通知。バナーなしで気づけるように</li>
+        <li><span class="badge badge-change">change</span><strong>手動実行方式に変更</strong>: アップグレードはユーザーがボタンを押して実行する方式に。バックグラウンド自動処理は廃止</li>
+        <li><span class="badge badge-fix">fix</span><strong>白画面問題修正</strong>: アップグレードやテーマ保存後に画面が真っ白になる問題を修正（iframeのみリロードする方式に変更）</li>
+      </ul>
+      <div class="section-title">⚙️ 設定UI改善</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>タブナビゲーション</strong>: 設定画面をキャラ／AI／外観／実行／他の5タブに再構成</li>
+        <li><span class="badge badge-feat">feat</span><strong>文字数制限を明記</strong>: システムプロンプトの推奨・最大文字数（推奨3,500字・最大約6,000字）を設定画面に記載</li>
+        <li><span class="badge badge-fix">fix</span><strong>GASバナー被さり修正</strong>: GASが挿入するバナーがUIに重なる問題を修正</li>
+        <li><span class="badge badge-fix">fix</span><strong>トースト折り返し修正</strong>: トースト通知のメッセージが横に切れる問題を修正</li>
+      </ul>
+      <div class="section-title">🌿 テラリウム</div>
+      <ul>
+        <li><span class="badge badge-change">change</span><strong>時間制限バケツ方式</strong>: 投稿数制限をデイリー制から1時間あたりの上限（デフォルト5投稿）に変更。リセットトリガー不要で自動リセット</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.8.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.8.0</span>
+      <span class="version-date">(2026-03-14)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">⏱️ スケジューラ最適化</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>毎分トリガー統一</strong>: <code>scheduledEveryMinute</code> を常に1分間隔に。LINEが5分間隔だったためポモドーロ・孤独プッシュが最大5分遅延していた問題を解消</li>
+        <li><span class="badge badge-fix">fix</span><strong>孤独プッシュ誤送信防止</strong>: プッシュ判定を10分間隔のフラグ制御に変更。1分ごとに呼ぶと連続送信されるリスクがあった</li>
+        <li><span class="badge badge-feat">feat</span><strong>テラリウム独立トリガー</strong>: テラリウムのスケジュールチェックを15分の独立トリガーに分離</li>
+        <li><span class="badge badge-change">change</span><strong>重複トリガー廃止</strong>: <code>scheduledCheck</code> の30分独立トリガーを廃止し、<code>scheduledEveryMinute</code> 内の制御に統合</li>
+      </ul>
+      <div class="section-title">🖼️ 画像処理統一</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>LINE/Telegram画像フロー統一</strong>: 画像受信後 N 分以内にテキストがなければ自動解析返信。LINE と Telegram で同じ動作に（<code>photo_reaction_timeout_minutes</code> で設定）</li>
+        <li><span class="badge badge-fix">fix</span><strong>画像の会話継続</strong>: 画像送信後の会話ログに <code>[画像]</code> プレフィックスを追加。次のターンでAIが画像のやりとりを参照できるように</li>
+        <li><span class="badge badge-change">change</span><strong>コードDRY化</strong>: プラットフォーム別の画像フェッチを <code>_fetchImageBase64_()</code> ヘルパーに統一</li>
+      </ul>
+      <div class="section-title">🧠 長期記憶改善</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>日付付き記憶</strong>: 長期記憶を「＜今週＞（日付付き）」+「＜以前＞（キーワードのみ）」の2段構成に。1週間以上前の記憶はキーワードに圧縮</li>
+        <li><span class="badge badge-feat">feat</span><strong>思い出優先</strong>: 記憶の優先基準をありふれた日常から「印象的な思い出・感情的に残るもの」に変更</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.7.3 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.7.3</span>
+      <span class="version-date">(2026-03-14)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 安定性修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>新規インストール安定化</strong>: 新規インストール時にLINE Webhookが応答しない問題を修正</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.7.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.7.2</span>
+      <span class="version-date">(2026-03-12)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">⚙️ 設定UI改善</div>
+      <ul>
+        <li><span class="badge badge-change">change</span><strong>セクション名改訂</strong>: 「AIコア」→「AI選択」、「記憶のエンジン」→「日記・記憶用のAI選択」、「ブラウザUI」→「ブラウザ画面設定」</li>
+        <li><span class="badge badge-change">change</span><strong>OpenRouterを末尾へ</strong>: エンジン選択肢でOpenRouterを一番下に並び替え</li>
+        <li><span class="badge badge-feat">feat</span><strong>クイックコマンド強化</strong>: 「今すぐスレッドを建てる」をクイックコマンドに追加</li>
+        <li><span class="badge badge-feat">feat</span><strong>メール内容表示切替</strong>: メール通知に「会話内容を含める」トグルを追加。OFFにすると件名のみ送信</li>
+        <li><span class="badge badge-change">change</span><strong>テーマカラー対応</strong>: メニュータイトルの文字色がテーマカラーに馴染むように調整</li>
+      </ul>
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>Slack別スレ記憶</strong>: Slackの別スレッド（テラリウム等）でユーザーが発言した内容がAIの記憶に残らない問題を修正</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.7.1 -->
   <div class="version-block">
     <div class="version-header">
