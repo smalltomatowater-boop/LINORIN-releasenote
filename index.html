@@ -58,6 +58,39 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.10.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.0</span>
+      <span class="version-date">(2026-03-17)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">⏱️ 返信遅延（間合い演出）</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>返信遅延設定</strong>: メッセージ受信後にランダム1〜N分の待機時間を設定可能。人間らしい間合いを演出（応答スタイルセクション）</li>
+        <li><span class="badge badge-feat">feat</span><strong>寂しさゲージ連動モード</strong>: 「距離感と孤独」の確率曲線に基づいてAIが返信タイミングを決める。ランダム遅延より優先</li>
+        <li><span class="badge badge-fix">fix</span><strong>LINE遅延配信修正</strong>: 遅延処理時にreplyTokenが失効してメッセージが届かない問題を修正（Push APIに自動切替）</li>
+      </ul>
+      <div class="section-title">🌿 テラリウム強化</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>テラリウム返信遅延</strong>: Botが返信するまでランダムに待機する上限時間を設定可能</li>
+        <li><span class="badge badge-feat">feat</span><strong>テラリウム寂しさ判定</strong>: 静寂が続くとBotが自動で話しかける。返信遅延より優先</li>
+        <li><span class="badge badge-fix">fix</span><strong>スレッド誤作成を修正</strong>: テラリウムが返信ではなく新規スレッドを立ててしまう問題を修正</li>
+      </ul>
+      <div class="section-title">🤖 GLM改善</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>thinking制御修正</strong>: GLM_THINKINGがONのとき非対応モデル（FlashX・Air等）でエラーになる問題を修正</li>
+        <li><span class="badge badge-feat">feat</span><strong>モデルリスト改善</strong>: APIが返さないモデルも静的リストで確保。glm-5-code・glm-ocrを追加</li>
+      </ul>
+      <div class="section-title">🔧 バグ修正・改善</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>メール本文トグル修正</strong>: OFFにしても本文が送られるバグを修正</li>
+        <li><span class="badge badge-fix">fix</span><strong>unified push重複修正</strong>: 全チャットをまとめるモードでLINEとWebUI両方に別々push飛ぶ問題を修正</li>
+        <li><span class="badge badge-change">change</span><strong>デフォルト値改善</strong>: 新規セットアップ時の会話モードを「全チャットをまとめる」、自発話しかけ時履歴参照をONに変更</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.9.0 -->
   <div class="version-block">
     <div class="version-header">
