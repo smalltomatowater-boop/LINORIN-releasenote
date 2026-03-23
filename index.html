@@ -58,6 +58,153 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.10.6 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.6</span>
+      <span class="version-date">(2026-03-23)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ 機能追加</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>💞 感情の深み（<code>add_emotion</code>）機能を追加</strong>: 設定UI「キャラクター設定」タブからON/OFF切替可能。以下4つの機能が有効化されます。
+          <ul style="margin-top:6px">
+            <li>日記生成時に翌日への引継ぎメモ（REFLECTION）を自動生成・保存し、翌日の会話でさりげなく活用</li>
+            <li>感情的な苦しみへの共感を強化 — 専門機関への誘導表現を使わず、そばにいる存在として寄り添う</li>
+            <li>ユーザーの発言量に返答長を同調（短文には短く、長文には長く返す）</li>
+            <li>Push時に過去の日記からランダムにエピソードを引用し、不意打ちで思い出話を振る</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.10.5 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.5</span>
+      <span class="version-date">(2026-03-23)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ 機能追加</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>壁紙パターンを6種追加</strong>: タータン（紫/茶）・ギンガム（青/茶）・チェック・ハート — ライト/ダークテーマ自動対応</li>
+        <li><span class="badge badge-feat">feat</span><strong>壁紙カスタムアップロードを改善</strong>: ファイル選択で即プレビュー、localStorage保存で確実に反映</li>
+        <li><span class="badge badge-feat">feat</span><strong>WebUIからテキスト・PDFアップロードに対応</strong></li>
+        <li><span class="badge badge-feat">feat</span><strong>Push停止トグルを追加</strong>: 設定UIから自発話しかけのON/OFFを制御</li>
+        <li><span class="badge badge-feat">feat</span><strong>WebUIでのポモドーロを明示的に非対応化</strong>: バックグラウンドタブのタイマー制限のため非対応と案内</li>
+      </ul>
+      <div class="section-title">🎨 UI改善</div>
+      <ul>
+        <li><span class="badge badge-change">improve</span><strong>チャットツールパネルを2行レイアウトに統一</strong>: ラベル→選択UIの順に改行配置</li>
+        <li><span class="badge badge-change">improve</span><strong>設定UIのタブアイコンを縮小</strong>（28px→20px）</li>
+        <li><span class="badge badge-change">improve</span><strong>時間帯プロンプト入力を1列化</strong>: 2列グリッド→1列フル幅で読みやすく</li>
+        <li><span class="badge badge-change">improve</span><strong>RAG「常に注入」トグルを別行に配置</strong></li>
+        <li><span class="badge badge-change">improve</span><strong>一時セッションボタンをヘッダーに移動</strong>、バナーをチャットエリア上部に</li>
+        <li><span class="badge badge-change">improve</span><strong>アイコンサイズ「極小」追加、フォントサイズ選択に9px追加</strong></li>
+        <li><span class="badge badge-change">improve</span><strong>不要な「設定を開く」ボタン行を削除</strong></li>
+      </ul>
+      <div class="section-title">🔧 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>壁紙パターンがライトテーマで見えない問題を修正</strong>: テーマ輝度に応じて色を動的生成</li>
+        <li><span class="badge badge-fix">fix</span><strong>日記生成の日付入力が読めない問題を修正</strong></li>
+        <li><span class="badge badge-fix">fix</span><strong>一時セッションバナーが途切れる問題を修正</strong>: 画面幅で自然に折り返すよう変更</li>
+        <li><span class="badge badge-fix">fix</span><strong>メール通知のカウントをAI自発メッセージのみに変更</strong></li>
+        <li><span class="badge badge-fix">fix</span><strong>タブ復帰時に即時ポーリング追加</strong>: トリガー通知の遅延を軽減</li>
+        <li><span class="badge badge-fix">fix</span><strong>Slack/Telegramからの画像付きメッセージが連鎖エラーになる問題を修正</strong>: handleMessage内でplatformがCONFIG設定値に上書きされ、SlackのファイルIDをLINE APIに送信していた</li>
+        <li><span class="badge badge-fix">fix</span><strong><code>?page=diag</code> にトークン認証を追加</strong>: setup()でDIAG_TOKENを自動生成、未認証リクエストは拒否</li>
+        <li><span class="badge badge-change">refactor</span><strong>LLM リトライロジックを統一</strong>: ChatGPT/Anthropic/Grok/GLM に <code>callWithRetry</code> ラッパーを適用（429/503で最大2回、1秒待機）</li>
+        <li><span class="badge badge-fix">fix</span><strong>postMessage 送信元チェックを追加</strong>: app_ui の message リスナーが自分の子frameからのメッセージのみ受け付けるよう修正</li>
+        <li><span class="badge badge-fix">fix</span><strong>XFrameOptions を SAMEORIGIN に変更</strong>: changelog・config ページを外部サイトからの iframe 埋め込み不可に</li>
+        <li><span class="badge badge-feat">feat</span><strong><code>add_emotion</code> スイッチ実装</strong>: CONFIG key "add_emotion" = TRUE で4機能が有効化 / Plan1: 内省メモ(REFLECTION)を日記生成時に保存→翌日引継ぎ / Plan2: システムプロンプトへ内省メモ注入+共感強化ルール / Plan3: ユーザー発言長に応じた返答長ミラーリング / Plan4: Push時に過去日記からランダムスニペットを注入（不意打ち記憶）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.10.4 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.4</span>
+      <span class="version-date">(2026-03-20)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ 機能追加</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>ローカルLLMモデルを「全モデル更新」で自動更新</strong>: 「全エンジン・モデルを更新」ボタンがローカルLLMサーバーにも問い合わせ、Configシートのプルダウンを最新に更新</li>
+        <li><span class="badge badge-feat">feat</span><strong>チャットUIに壁紙設定機能を追加</strong>: ドット・ストライプ・グリッド・チェック・ハート・スター・カスタムURLから選択可能</li>
+        <li><span class="badge badge-feat">feat</span><strong>ポップテーマ7種を追加</strong>: コットンキャンディ・ブルーベリー・チョコチェリー・バニラストロベリー・抹茶ミルク・レモンキャラメル・ストロベリー</li>
+      </ul>
+      <div class="section-title">🎨 UI改善</div>
+      <ul>
+        <li><span class="badge badge-change">improve</span><strong>テーマ選択を4グループに整理</strong>: ダーク・ポップ・パステル・カスタムの optgroup で分類</li>
+        <li><span class="badge badge-change">improve</span><strong>ツールパネルの保存ボタンをアクセントカラー塗りつぶしに変更</strong>: どのテーマでも視認性を確保</li>
+      </ul>
+      <div class="section-title">🔧 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>PCブラウザでフォント読み込みがクラッシュする問題を修正</strong>: <code>loadChatGoogleFont</code> の変数宣言ホイスティングによる TypeError を解消</li>
+        <li><span class="badge badge-fix">fix</span><strong>ポップ/ダークテーマでバブルのテキストが読めない問題を修正</strong>: バブルごとに背景色から自動コントラスト計算</li>
+        <li><span class="badge badge-fix">fix</span><strong>メール通知の件名を変更</strong>: 「ロボとの会話まとめ」→「N件のメッセージがあります」</li>
+        <li><span class="badge badge-fix">fix</span><strong>トーストの文字色が読めない問題を修正</strong>: 設定UI・チャットUIともに固定白に変更</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.10.3 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.3</span>
+      <span class="version-date">(2026-03-18)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔧 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>モデル更新時にAPIキーが消える問題を修正</strong>: 設定UIのパスワードフィールドが空で送信された際に、既存のAPIキー・トークン・シークレット類を上書きしないよう保護</li>
+        <li><span class="badge badge-fix">fix</span><strong>モデルリストが空の場合に更新処理が例外で停止する問題を修正</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.10.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.2</span>
+      <span class="version-date">(2026-03-17)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔧 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>WebUIの返信遅延設定が効いていなかった問題を修正</strong>: 遅延設定がある場合にチャットUIが即時応答を返していたバグを修正。遅延設定時はキューに積んでポーリングで受信する方式に変更</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.10.1 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.1</span>
+      <span class="version-date">(2026-03-17)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔧 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>「1日のリズム」設定が保存されない問題を修正</strong>: セットアップを複数回実行すると時間帯・インストラクション設定が重複・初期化されるバグを修正。既存の重複行も自動クリーンアップされます（再セットアップ推奨）</li>
+        <li><span class="badge badge-fix">fix</span><strong>「1日のリズム」設定項目のdescription欄が空だった問題を修正</strong>: 【変数】/【システム指示】の区別と対象時間帯を明示するよう変更</li>
+      </ul>
+      <div class="section-title">⚡ APIエラーハンドリング強化</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>レート制限エラーのラベルを「リクエスト上限」に変更</strong>: 課金上限エラー（HTTP 429）も含まれるため、より正確な表現に修正</li>
+        <li><span class="badge badge-feat">feat</span><strong>課金上限エラー（error_api_402）を新規追加</strong>: OpenRouter等の課金上限に特化したエラーメッセージを個別設定できるように</li>
+      </ul>
+      <div class="section-title">✨ システムプロンプト改善</div>
+      <ul>
+        <li><span class="badge badge-change">improve</span><strong>buildSystemText() 全面改善</strong>: 各ブロックを「ラベル」から「AIへの具体的な指示文」に改善。能力の低いモデルでも意図が伝わりやすい構造に</li>
+        <li><span class="badge badge-change">improve</span><strong>現在時刻を常時注入</strong>: TIME_BEHAVIORがなくても現在時刻（JST）と時間帯が必ずシステムプロンプトに含まれるように</li>
+        <li><span class="badge badge-change">improve</span><strong>AIの名前（partner_name）を常時注入</strong></li>
+        <li><span class="badge badge-change">improve</span><strong>RAG・記憶ブロックに利用指示文を追加</strong>: 「事実として扱う」「記憶にない内容の創作は禁止」等の指示を明記</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.10.0 -->
   <div class="version-block">
     <div class="version-header">
