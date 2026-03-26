@@ -58,6 +58,21 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.10.10 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.10</span>
+      <span class="version-date">(2026-03-26)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔧 日記API修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>日記生成で Gemini に空の user コンテンツを送っていたバグを修正</strong>: Anthropic / ChatGPT と同様にフォールバックテキストを設定。</li>
+        <li><span class="badge badge-fix">fix</span><strong><code>diary_max_tokens</code> 設定が日記生成に適用されていなかったバグを修正</strong>: <code>callSubLLM</code> の <code>resolvedMaxTokens</code> が各 API 呼び出しに正しく渡されるよう修正。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.10.9 -->
   <div class="version-block">
     <div class="version-header">
