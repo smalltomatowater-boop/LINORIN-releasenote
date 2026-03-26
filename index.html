@@ -58,6 +58,26 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.11.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.11.0</span>
+      <span class="version-date">(2026-03-26)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">📔 日記システム刷新</div>
+      <ul>
+        <li><span class="badge badge-change">refactor</span><strong>AI一人格設計に変更</strong>: 全ユーザーループを廃止し、外部ユーザー優先の1件処理に簡略化。日記・記憶ともに AI は1つの人格として扱われるよう統一。</li>
+        <li><span class="badge badge-feat">feat</span><strong>unified モードで全セッションのログを合算して日記生成</strong>: LINE と WebUI 両方の会話が1つの日記に反映されるよう改善。</li>
+        <li><span class="badge badge-feat">feat</span><strong>日記の会話ログを HH:mm タイムスタンプ付きで時系列取得</strong>: 新関数 <code>getConversationForDiary</code> を導入。最大50件に制限してプロンプト肥大化を防止。</li>
+        <li><span class="badge badge-feat">feat</span><strong>日記に過去日記スニペットを参考情報として追加</strong>: ランダムに選んだ過去日記の冒頭を「関連/ネタ不足時のみ使う」任意ブロックとして挿入。</li>
+        <li><span class="badge badge-fix">fix</span><strong>さくらのAIクラウドが日記・chat で正しく選択されない問題を修正</strong>: <code>hasConfig</code> の1引数バグを修正し、Sakura が正しくルーティングされるように。</li>
+        <li><span class="badge badge-fix">fix</span><strong>さくらのAIクラウドの認証エラー（401）を修正</strong>: <code>ACCESS_TOKEN:SECRET</code> 連結形式から <code>ACCESS_TOKEN</code> 単体 Bearer に修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>WebUI 日記生成ボタンがモバイルで「実行中」のまま固まる問題を修正</strong>: 即時トリガーで非同期化し、完了をチャットに通知するよう変更。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.10.10 -->
   <div class="version-block">
     <div class="version-header">
@@ -69,6 +89,11 @@ code{
       <ul>
         <li><span class="badge badge-fix">fix</span><strong>日記生成で Gemini に空の user コンテンツを送っていたバグを修正</strong>: Anthropic / ChatGPT と同様にフォールバックテキストを設定。</li>
         <li><span class="badge badge-fix">fix</span><strong><code>diary_max_tokens</code> 設定が日記生成に適用されていなかったバグを修正</strong>: <code>callSubLLM</code> の <code>resolvedMaxTokens</code> が各 API 呼び出しに正しく渡されるよう修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>日記のサブLLMでさくらのAIクラウドを指定しても Gemini にフォールバックしていたバグを修正</strong>: <code>hasConfig("SAKURA_MODEL")</code> が1引数呼び出しのため常に <code>false</code> を返す問題を修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>さくらのAIクラウドの認証が誤った形式になっていたバグを修正</strong>: <code>ACCESS_TOKEN:SECRET</code> 連結形式（401エラー）から <code>ACCESS_TOKEN</code> 単体の Bearer 認証に修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>chat でも Sakura が正しく呼ばれるよう <code>callLLM</code> の Sakura 分岐を修正</strong>: <code>hasConfig</code> 1引数バグを <code>callLLM</code> 側でも修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>unified + LINE モードで日記通知が WebUI に届いていた問題を修正</strong>: <code>generateDailyDiaryForAllUsers</code> に外部ユーザー存在時の WebUI スキップロジックを追加。</li>
+        <li><span class="badge badge-fix">fix</span><strong>LINE push 失敗時のエラーがサイレントに無視されていた問題を修正</strong>: HTTP レスポンスコードを確認してログ出力するよう変更。</li>
       </ul>
     </div>
   </div>
