@@ -58,6 +58,65 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.10.9 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.9</span>
+      <span class="version-date">(2026-03-26)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔧 バグ修正まとめ</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>WebUI + unified モードで「今すぐ生成」が機能しなかった問題を修正</strong>: <code>getAllUserStates</code> が <code>allowed_line_users</code> フィルタで WebUI ユーザーを除外、<code>generateDailyDiaryForAllUsers</code> が LINE platform で通知していた 2 つのバグを修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>WebUI + unified モードでのプッシュが LINE で上書きされる問題を修正</strong>: <code>scheduledCheck</code> / <code>generateLongTermMemoryForAllUsers</code> に <code>effectivePlatform</code> パターンを適用。</li>
+        <li><span class="badge badge-fix">fix</span><strong>会話ゼロの日も日記を生成するよう変更</strong>: 会話ログが 0 件の場合、「今日は会話がなかった」待ち日記プロンプトに自動切替して生成。</li>
+        <li><span class="badge badge-fix">fix</span><strong>カスタム壁紙が再読み込み後に消える問題を修正</strong>: アップロード画像を Drive に永続保存し、localStorage をキャッシュとして利用するハイブリッド方式に変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong>さくらのAIクラウドのモデルが WebUI に表示されなかった問題を修正</strong>: <code>SAKURA_MODEL</code> / <code>SUB_SAKURA_MODEL</code> の選択肢をスキーマに直接埋め込み、初回から選択可能に。</li>
+        <li><span class="badge badge-fix">fix</span><strong>Drive API 経由の PDF テキスト抽出が機能していなかった問題を修正</strong>: <code>isDriveApiAvailable()</code> の Drive v2 フィールド名誤り（<code>files</code>→<code>items</code>）を修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>テラリウムがユーザー発言に反応しない問題を修正</strong>: Google Sheets が <code>"TRUE"</code> を boolean <code>true</code> に自動変換するため <code>is_bot</code> 判定が全 bot メッセージで <code>false</code> になり、hourly limit を使い切ってからユーザーに無反応になっていた。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.10.8 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.8</span>
+      <span class="version-date">(2026-03-26)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔧 バグ修正 &amp; 内部整理</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>さくらのAIクラウドのモデルが WebUI に表示されなかった問題を修正</strong>: <code>SAKURA_MODEL</code> / <code>SUB_SAKURA_MODEL</code> の選択肢をスキーマに直接埋め込み、初回から選択可能に。</li>
+        <li><span class="badge badge-fix">fix</span><strong>Drive API 経由の PDF テキスト抽出が機能していなかった問題を修正</strong>: <code>isDriveApiAvailable()</code> の Drive v2 フィールド名誤り（<code>files</code>→<code>items</code>）を修正。<code>extractTextViaDrive()</code> を <code>Drive.Files.insert()</code> 直接変換方式に簡略化。</li>
+        <li><span class="badge badge-fix">fix</span><strong>テラリウムがユーザー発言に反応しない問題を修正</strong>: Google Sheets が <code>"TRUE"</code> を boolean <code>true</code> に自動変換するため <code>is_bot</code> 判定が全 bot メッセージで <code>false</code> になり、bot 同士の連鎖で hourly limit を消費してからユーザーに無反応になっていた。</li>
+        <li><span class="badge badge-fix">fix</span><strong>ローカルLLMサーバー停止中のタイムアウト問題を修正</strong>: <code>LOCAL_LLM_ENABLED=FALSE</code> でサーバー接続をスキップしてフォールバックへ即切替。</li>
+        <li><span class="badge badge-change">refactor</span><strong>LINORIN.js のセクション順を整理</strong>: SETUP を先頭近く・<code>buildSystemText</code> を MESSAGE BUILD 直前・エントリーポイントをまとめ・デバッグ関数を debug_tools.js へ集約。</li>
+        <li><span class="badge badge-fix">fix</span><strong>WebUI + unified モードで「今すぐ生成」が機能しなかった問題を修正</strong>: <code>getAllUserStates</code> が <code>allowed_line_users</code> フィルタで WebUI ユーザーを除外、<code>generateDailyDiaryForAllUsers</code> が LINE platform で通知していた 2 つのバグを修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>WebUI + unified モードでのプッシュが LINE で上書きされる問題を修正</strong>: <code>scheduledCheck</code> / <code>generateLongTermMemoryForAllUsers</code> に <code>effectivePlatform</code> パターンを適用。</li>
+        <li><span class="badge badge-fix">fix</span><strong>日記の二重生成を防止</strong>: ScriptProperties による当日分のデデュープロックを追加（WebUI 再生成機能は対象外）。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.10.7 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.10.7</span>
+      <span class="version-date">(2026-03-24)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔧 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>ローカルLLMサーバー停止中のタイムアウト問題を修正</strong>: <code>LOCAL_LLM_ENABLED</code> をOFFにするとサーバーへの接続をスキップし、フォールバックエンジンに即切替。設定UI「API設定」タブから切替可能。</li>
+        <li><span class="badge badge-fix">fix</span><strong>さくらのAIクラウドのモデルが WebUI に表示されなかった問題を修正</strong>: <code>SAKURA_MODEL</code> / <code>SUB_SAKURA_MODEL</code> の選択肢をスキーマに直接埋め込み、「全エンジン・モデルを更新」未実行の環境でも初回から選択可能に。</li>
+        <li><span class="badge badge-change">refactor</span><strong>LINORIN.js のセクション順を整理</strong>: SETUP を先頭近く・<code>buildSystemText</code> を MESSAGE BUILD 直前・<code>doGet</code>/<code>doPost</code> をエントリーポイントとしてまとめ・デバッグ関数を debug_tools.js へ集約。</li>
+        <li><span class="badge badge-fix">fix</span><strong>Drive API 経由の PDF テキスト抽出が機能していなかった問題を修正</strong>: <code>isDriveApiAvailable()</code> が Drive v2 の正しいフィールド名（<code>items</code>）を参照するよう修正。<code>extractTextViaDrive()</code> を <code>Drive.Files.insert()</code> 直接変換方式に簡略化。</li>
+        <li><span class="badge badge-fix">fix</span><strong>テラリウムがユーザー発言に反応しない問題を修正</strong>: Google Sheets が <code>"TRUE"</code> 文字列を boolean <code>true</code> に自動変換するため <code>is_bot</code> 判定が全 bot メッセージで <code>false</code> になり、bot 同士の連鎖で hourly limit を消費してからユーザーに無反応になっていた。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.10.6 -->
   <div class="version-block">
     <div class="version-header">
