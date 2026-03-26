@@ -58,6 +58,21 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.11.1 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.11.1</span>
+      <span class="version-date">(2026-03-26)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔧 日記・記憶のプラットフォーム汎用化</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>unified モードの日記・記憶生成が Slack / Telegram でも正しく動作するよう修正</strong>: 「全ユーザーのログ」でなく「設定中のメッセアプリユーザー + WebUI」の組み合わせに限定。LINE 専用の設計を汎用化。</li>
+        <li><span class="badge badge-fix">fix</span><strong>unified モードで記憶統合が WebUI のログを含むよう修正</strong>: <code>getConversationForMemory</code> / <code>generateLongTermMemory</code> を複数ID対応に変更。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.11.0 -->
   <div class="version-block">
     <div class="version-header">
