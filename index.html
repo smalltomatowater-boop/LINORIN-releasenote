@@ -58,6 +58,20 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.11.4 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.11.4</span>
+      <span class="version-date">(2026-03-27)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>「全エンジン・モデルを更新」で <code>getLocalLLMModelList is not defined</code> エラーが発生する問題を修正</strong>: <code>local_llm.js</code> を持たない環境（Drive SOURCE から手動セットアップした場合など）やローカルLLMが無効な環境でボタンを押すとクラッシュしていた。<code>typeof</code> ガードと <code>LOCAL_LLM_ENABLED</code> チェックを追加してスキップするように修正。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.11.3 -->
   <div class="version-block">
     <div class="version-header">
@@ -68,6 +82,7 @@ code{
       <div class="section-title">📄 PDF・ファイル処理の修正</div>
       <ul>
         <li><span class="badge badge-fix">fix</span><strong>PDF テキスト抽出が動作しない問題を修正</strong>: GAS で Drive を Advanced Service として追加すると v3 がデフォルトになるが、コードが v2 API（<code>Files.insert</code>）を使っていたため PDF が読み取れなかった。<code>Files.create</code> / <code>pageSize</code> / <code>files</code> に更新して v3 に対応。LINE・WebUI 両方で修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>「全エンジン・モデルを更新」で <code>getLocalLLMModelList is not defined</code> エラーが発生する問題を修正</strong>: <code>local_llm.js</code> を持たない環境でクラッシュしていた。<code>typeof</code> ガードと <code>LOCAL_LLM_ENABLED</code> チェックを追加してスキップするように修正。</li>
         <li><span class="badge badge-change">改善</span><strong>Drive API テストを自動テストに追加</strong>: Drive の疎通確認・Google Docs 変換が正常に動作するかを <code>?page=test</code> エンドポイントで自動チェック。</li>
       </ul>
     </div>
