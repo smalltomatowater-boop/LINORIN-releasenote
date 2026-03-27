@@ -58,6 +58,24 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.11.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.11.2</span>
+      <span class="version-date">(2026-03-27)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🚨 ScriptProperties 容量問題の修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>doPost 無応答インシデントを修正</strong>: <code>_diag_dopost_</code> デバッグログが ScriptProperties に蓄積し 500KB 上限に達していた根本原因を除去。Slack でメッセージを大量送信すると返答が来なくなる問題が解消。</li>
+        <li><span class="badge badge-fix">fix</span><strong>dedup キー蓄積の早期抑制</strong>: <code>_cleanupDedupKeys_</code> の閾値を 500→200・保持件数を 300→100 に引き下げ。</li>
+        <li><span class="badge badge-fix">fix</span><strong>dailyReset ロックキー無限蓄積を修正</strong>: <code>_dailyReset_ran_YYYYMMDD</code> キーを実行時に当日分以外すべて削除するよう変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong>RSSキャッシュを CacheService に移行</strong>: <code>rss_cache</code> を ScriptProperties（9KB/値上限）から CacheService（TTL 2時間・100KB上限）に移行。</li>
+        <li><span class="badge badge-fix">fix</span><strong>全エンジンのモデルリスト保存件数を制限</strong>: <code>MODEL_OPTS_*</code> キーを一律先頭100件に制限。OpenRouter など数百件のリストが9KB上限を超える問題を修正。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.11.1 -->
   <div class="version-block">
     <div class="version-header">
@@ -69,6 +87,17 @@ code{
       <ul>
         <li><span class="badge badge-fix">fix</span><strong>unified モードの日記・記憶生成が Slack / Telegram でも正しく動作するよう修正</strong>: 「全ユーザーのログ」でなく「設定中のメッセアプリユーザー + WebUI」の組み合わせに限定。LINE 専用の設計を汎用化。</li>
         <li><span class="badge badge-fix">fix</span><strong>unified モードで記憶統合が WebUI のログを含むよう修正</strong>: <code>getConversationForMemory</code> / <code>generateLongTermMemory</code> を複数ID対応に変更。</li>
+      </ul>
+      <div class="section-title">🚨 インシデント対応 (internal 1.11.1.1)</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>doPost が無応答になるインシデントを修正</strong>: <code>_diag_dopost_</code> デバッグログが ScriptProperties に蓄積し続け 500KB 上限に達していた根本原因を除去。</li>
+        <li><span class="badge badge-fix">fix</span><strong>dedup キー蓄積の早期抑制</strong>: <code>_cleanupDedupKeys_</code> の閾値を 500→200・保持件数を 300→100 に引き下げ。</li>
+        <li><span class="badge badge-fix">fix</span><strong>dailyReset ロックキー無限蓄積を修正</strong>: <code>_dailyReset_ran_YYYYMMDD</code> キーを実行時に当日分以外すべて削除するよう変更。</li>
+      </ul>
+      <div class="section-title">📦 ScriptProperties 容量対策 (internal 1.11.1.2〜1.11.1.3)</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>RSSキャッシュを CacheService に移行</strong>: <code>rss_cache</code> を ScriptProperties から CacheService（TTL 2時間）に移行。9KB/値上限を回避。</li>
+        <li><span class="badge badge-fix">fix</span><strong>全エンジンのモデルリスト保存件数を制限</strong>: <code>MODEL_OPTS_*</code> キーを <code>updateModelDropdown</code> で一律先頭100件に制限。OpenRouter など数百件のリストが9KB上限を超える問題を修正。</li>
       </ul>
     </div>
   </div>
