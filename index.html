@@ -58,6 +58,28 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.11.5 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.11.5</span>
+      <span class="version-date">(2026-03-29)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>LINEで画像受信時の確認メッセージが届かない問題を修正</strong>: 高速処理パス（<code>_processLineSingleEvent</code>）への移行時に <code>pushMessage</code> の呼び出しが漏れていた。</li>
+        <li><span class="badge badge-fix">fix</span><strong>Slackで画像+テキスト同時送信時に画像が無視される問題を修正</strong>: 画像読み取り失敗時にユーザーのテキストが上書きされていた。元テキストを保持しつつ「画像を確認できなかった」旨のインストラクションをAIに渡すよう変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong><code>MESSAGING_PLATFORM=slack</code> 環境でシステム通知がSlackに届かない問題を修正</strong>: <code>webui_user_id</code> に Slack ユーザーIDと同じ値を設定していると、さみしさpush・ポモドーロ終了通知・日記生成通知・記憶生成エラー通知がすべて webui 扱いになって Slack に届かなかった（4箇所修正）。</li>
+        <li><span class="badge badge-fix">fix</span><strong>返信遅延中のユーザーへの孤独pushが二重送信される問題を修正</strong>: <code>reply_delay_max_min</code> 設定時、ユーザーのメッセージへの返信を待っている間に <code>scheduledCheck</code> が孤独pushを送ってしまっていた。キュー待ち中のユーザーをスキップするよう変更。</li>
+      </ul>
+      <div class="section-title">✨ 新機能</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>診断API <code>queue-clear</code> — 滞留キューのクリア</strong>: <code>?page=diag&amp;target=queue-clear</code> で10分以上滞留している queued/processing 行を failed に更新。詰まったキューを即座に解消できる。</li>
+        <li><span class="badge badge-feat">feat</span><strong>診断API <code>push-test</code> — 全プラットフォーム疎通確認</strong>: <code>?page=diag&amp;target=push-test</code> でLLMを使ったテストメッセージを LINE/Slack/Telegram/WebUI に送信し、各APIのレスポンスを確認。会話ログ・lastInteraction に影響なし。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.11.4 -->
   <div class="version-block">
     <div class="version-header">
@@ -68,6 +90,19 @@ code{
       <div class="section-title">🐛 バグ修正</div>
       <ul>
         <li><span class="badge badge-fix">fix</span><strong>「全エンジン・モデルを更新」で <code>getLocalLLMModelList is not defined</code> エラーが発生する問題を修正</strong>: <code>local_llm.js</code> を持たない環境（Drive SOURCE から手動セットアップした場合など）やローカルLLMが無効な環境でボタンを押すとクラッシュしていた。<code>typeof</code> ガードと <code>LOCAL_LLM_ENABLED</code> チェックを追加してスキップするように修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>「今すぐ話しかける」が無音で何も起きない問題を修正</strong>: 自発話しかけ（Push）がオフの状態でボタンを押しても無反応だった。オフの場合はエラートーストを表示するように修正。</li>
+      </ul>
+      <div class="section-title">✨ UI 改善</div>
+      <ul>
+        <li><span class="badge badge-change">ui</span><strong>AI選択 — 使用中エンジンのモデル設定のみ表示</strong>: エンジン切り替えドロップダウンに連動して、そのエンジンのモデル設定だけが表示されるように変更。全プロバイダーのモデルが並ぶ圧迫感を解消。</li>
+        <li><span class="badge badge-change">ui</span><strong>応答スタイル / 距離感と孤独 に「詳細設定 ▼」を追加</strong>: 高度な設定（履歴系・Temperature・TopP・確率調整など）を折りたたんで視覚的に軽量化。</li>
+        <li><span class="badge badge-change">ui</span><strong>応答スタイルの返信設定を前に移動</strong>: 返信遅延・返信タイミングをよく使う設定として先頭グループへ移動。Temperature / Top P は詳細設定に移動。</li>
+        <li><span class="badge badge-change">ui</span><strong>距離感と孤独の「1日の最大Push回数」を自発ON/OFFの直後に移動</strong>: コア設定として最上位に配置。</li>
+        <li><span class="badge badge-change">ui</span><strong>AI選択のモデル並び順を変更</strong>: ローカルLLMを最下部に移動。Gemini / ChatGPT / Anthropic / Grok / GLM / さくら / OpenRouter / ローカルLLM の順に統一。</li>
+        <li><span class="badge badge-fix">fix</span><strong>LINEで画像受信時の確認メッセージが送られなくなっていた問題を修正</strong>: 高速処理パス（<code>_processLineSingleEvent</code>）への移行時に <code>pushMessage</code> の呼び出しが漏れていた。</li>
+        <li><span class="badge badge-fix">fix</span><strong>画像フェッチ失敗時にユーザーの元テキストが消える問題を修正</strong>: Slack で画像+テキストを送った際、画像の読み取りに失敗するとユーザーのテキストが上書きされて会話が進んでいた。元テキストを保持しつつ「画像を確認できなかった」旨のインストラクションをAIに渡すよう変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong><code>MESSAGING_PLATFORM=slack</code> 環境でシステム通知がSlackに届かない問題を修正</strong>: <code>webui_user_id</code> に Slack ユーザーIDと同じ値を設定していると、さみしさpush・ポモドーロ終了通知・日記生成通知・記憶生成エラー通知がすべて webui 扱いになって Slack に届かなかった。<code>isWebuiUser</code>（userId 判定）ではなく <code>platform === "webui"</code> で送信先を決定するよう修正（<code>scheduledCheck</code> / <code>pomodoroTimerCheck</code> / <code>generateLongTermMemoryForAllUsers</code> / <code>generateDailyDiaryForAllUsers</code> の4箇所）。</li>
+        <li><span class="badge badge-fix">fix</span><strong>返信遅延中のユーザーにpushが二重送信される問題を修正</strong>: <code>reply_delay_max_min</code>（返信遅延）設定時、ユーザーがメッセージを送ってから bot が実際に返信するまでの間に <code>scheduledCheck</code> が「長時間無音」と判定して別途 push を送ってしまうことがあった。<code>scheduledCheck</code> 冒頭で <code>event_queue</code> を一括チェックし、queued/processing 状態のユーザーをスキップするよう修正。古いスタック行による誤ブロックを防ぐため <code>createdAt</code> で遅延ウィンドウ内の行のみを対象とし、返信遅延設定がない場合はチェック自体をスキップするよう改善。</li>
       </ul>
     </div>
   </div>
