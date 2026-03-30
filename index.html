@@ -58,6 +58,37 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.12.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.12.0</span>
+      <span class="version-date">(2026-03-30)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ 新機能</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>設定画面に「症状から診断」を追加</strong>: 「返事が来ない」「プッシュが来ない」「日記ができない」の3ボタンで healthチェック+ユーザー状態を一括取得し、コピーしやすいテキストレポートを生成。「デバッグ・メンテナンス」セクション内に統合。</li>
+        <li><span class="badge badge-feat">feat</span><strong>診断API <code>queue-clear</code> — 滞留キューのクリア</strong>: <code>?page=diag&amp;target=queue-clear</code> で10分以上滞留している queued/processing 行を failed に更新。詰まったキューを即座に解消できる。</li>
+        <li><span class="badge badge-feat">feat</span><strong>診断API <code>push-test</code> — 全プラットフォーム疎通確認</strong>: <code>?page=diag&amp;target=push-test</code> でLLMを使ったテストメッセージを LINE/Slack/Telegram/WebUI に送信し、各APIのレスポンスを確認。会話ログ・lastInteraction に影響なし。</li>
+        <li><span class="badge badge-feat">feat</span><strong>診断API <code>health</code>（計12項目）</strong>: キュー詰まり・トリガーハートビート・LLM API疎通・プラットフォーム接続・必須シート・必須configキー・LockService・<code>push_enable</code>・LINE月間quota・トリガー設定・モデルキャッシュ・<strong>日次push上限超過</strong> を一括チェック。</li>
+      </ul>
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>「必ず話しかける時間」が到達後も発火しないことがある問題を修正</strong>: <code>lonely_ceiling_min</code> 到達後も確率抽選が走っており、条件次第で長時間発火しなかった。ceiling 到達時は抽選をスキップして強制発火するよう変更（<code>timeWeight=0</code> 深夜ミュートは尊重）。</li>
+        <li><span class="badge badge-fix">fix</span><strong>Gemini フォールバック機能が動作しない問題を修正</strong>: 旧実装はリクエストをまたいだカウンター方式のため、503/429 が N 回続くまでユーザーにエラーが届いていた。503/429 発生時に同一リクエスト内で即座に代替モデルへ切り替える方式に変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong>LINEで画像受信時の確認メッセージが届かない問題を修正</strong>: 高速処理パスへの移行時に <code>pushMessage</code> の呼び出しが漏れていた。</li>
+        <li><span class="badge badge-fix">fix</span><strong>Slackで画像+テキスト同時送信時に画像が無視される問題を修正</strong>: 画像読み取り失敗時にユーザーのテキストが上書きされていた。元テキストを保持しつつ「画像を確認できなかった」旨のインストラクションをAIに渡すよう変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong><code>MESSAGING_PLATFORM=slack</code> 環境でシステム通知がSlackに届かない問題を修正</strong>: <code>webui_user_id</code> に Slack ユーザーIDと同じ値を設定していると、さみしさpush・ポモドーロ終了通知・日記生成通知・記憶生成エラー通知がすべて webui 扱いになって Slack に届かなかった（4箇所修正）。</li>
+        <li><span class="badge badge-fix">fix</span><strong>返信遅延中のユーザーへの孤独pushが二重送信される問題を修正</strong>: <code>reply_delay_max_min</code> 設定時、返信待ち中に <code>scheduledCheck</code> が孤独pushを送ってしまっていた。</li>
+      </ul>
+      <div class="section-title">🎨 UI改善</div>
+      <ul>
+        <li><span class="badge badge-change">ui</span><strong>「感情の振れ幅」と「Temperature」を統合</strong>: <code>char_temp_bias</code>（感情の振れ幅）は <code>temperature</code> に乗算するだけの冗長な設定だったため削除。<code>temperature</code> のラベルを「感情の振れ幅」に変更し、1つのスライダーで完結するよう整理。</li>
+        <li><span class="badge badge-change">ui</span><strong>診断レポートのpush表示を <code>8/5 ⚠️上限超</code> 形式に変更</strong>: 日次push上限の消費状況が一目でわかるように。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.11.5 -->
   <div class="version-block">
     <div class="version-header">
@@ -72,10 +103,21 @@ code{
         <li><span class="badge badge-fix">fix</span><strong><code>MESSAGING_PLATFORM=slack</code> 環境でシステム通知がSlackに届かない問題を修正</strong>: <code>webui_user_id</code> に Slack ユーザーIDと同じ値を設定していると、さみしさpush・ポモドーロ終了通知・日記生成通知・記憶生成エラー通知がすべて webui 扱いになって Slack に届かなかった（4箇所修正）。</li>
         <li><span class="badge badge-fix">fix</span><strong>返信遅延中のユーザーへの孤独pushが二重送信される問題を修正</strong>: <code>reply_delay_max_min</code> 設定時、ユーザーのメッセージへの返信を待っている間に <code>scheduledCheck</code> が孤独pushを送ってしまっていた。キュー待ち中のユーザーをスキップするよう変更。</li>
       </ul>
+      <div class="section-title">🎨 UI改善</div>
+      <ul>
+        <li><span class="badge badge-change">ui</span><strong>設定画面の「診断」タブに「症状から診断」セクションを追加</strong>: 「返事が来ない」「プッシュが来ない」「日記ができない」の3ボタンで healthチェック+ユーザー状態を一括取得し、コピーしやすいテキストレポートを生成。</li>
+        <li><span class="badge badge-change">ui</span><strong>「感情の振れ幅」と「Temperature」を統合</strong>: <code>char_temp_bias</code>（感情の振れ幅）は <code>temperature</code> に乗算するだけの冗長な設定だったため削除。<code>temperature</code> のラベルを「感情の振れ幅」に変更し、1つのスライダーで完結するよう整理。</li>
+      </ul>
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>「必ず話しかける時間」が期限到達後も発火しないことがある問題を修正</strong>: <code>lonely_ceiling_min</code> に達した後も確率抽選（<code>Math.random()</code>）が走っており、設定条件によっては長時間発火しないことがあった。ceiling 到達時は抽選をスキップして強制発火するよう変更（<code>timeWeight=0</code> の深夜ミュートは引き続き尊重）。</li>
+        <li><span class="badge badge-fix">fix</span><strong>Gemini フォールバック機能が動作しない問題を修正</strong>: 旧実装はリクエストをまたいだカウンター方式のため、503/429 が N 回続くまでユーザーにエラーが届いていた。503/429 発生時に同一リクエスト内で即座に代替モデルへ切り替える方式に変更。<code>gemini_503_retry</code> 設定は廃止。</li>
+      </ul>
       <div class="section-title">✨ 新機能</div>
       <ul>
         <li><span class="badge badge-feat">feat</span><strong>診断API <code>queue-clear</code> — 滞留キューのクリア</strong>: <code>?page=diag&amp;target=queue-clear</code> で10分以上滞留している queued/processing 行を failed に更新。詰まったキューを即座に解消できる。</li>
         <li><span class="badge badge-feat">feat</span><strong>診断API <code>push-test</code> — 全プラットフォーム疎通確認</strong>: <code>?page=diag&amp;target=push-test</code> でLLMを使ったテストメッセージを LINE/Slack/Telegram/WebUI に送信し、各APIのレスポンスを確認。会話ログ・lastInteraction に影響なし。</li>
+        <li><span class="badge badge-feat">feat</span><strong>診断API <code>health</code> の強化（計11項目）</strong>: 従来の7項目に加えて以下を追加。①<code>push_enable</code> オフ検出（メッセが来ない原因）、②LINE月間push上限の残量確認（<code>/v2/bot/message/quota</code> で quota/consumed を比較、上限超過でerror、80%超でwarn）、③<code>dailyReset</code> トリガーの存在確認（日記でない原因）、④モデルキャッシュ（<code>MODEL_OPTS_*</code> ScriptProperty）の陳腐化検出（現在のエンジン設定と一致しない古いキャッシュを検出、モデル更新されない原因）。</li>
       </ul>
     </div>
   </div>
