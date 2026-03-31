@@ -58,6 +58,30 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.13.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.13.0</span>
+      <span class="version-date">(2026-03-31)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>診断の <code>daily_push_limit</code> チェックで ReferenceError が発生する問題を修正</strong>: <code>_healthCheck_</code> 内で <code>conf</code> が未定義のまま参照していた。<code>CONFIG["daily_push_limit"]</code> に修正。</li>
+        <li><span class="badge badge-fix">fix</span><strong>ヘルスチェックのトリガーハートビートが常に ℹ️（3分超）になる問題を修正</strong>: ハートビート記録が10分間隔の <code>scheduledCheck()</code> 内にあったため常に閾値超えになっていた。1分間隔の <code>scheduledEveryMinute()</code> の先頭に移動。</li>
+        <li><span class="badge badge-fix">fix</span><strong>非アクティブなプラットフォームのチェック失敗が診断 overall を warn にする問題を修正</strong>: <code>MESSAGING_PLATFORM</code> で使用していないプラットフォームのトークンが未設定でも overallOk に影響していた。アクティブなプラットフォームのみに限定。</li>
+        <li><span class="badge badge-fix">fix</span><strong>LINE以外の環境で <code>line_quota</code> チェックが overall に影響する問題を修正</strong>: <code>activePlatform === "line"</code> のときのみ overallOk に影響するよう変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong><code>channel_merge</code> 時にポモドーロ終了通知がメッセージアプリに届かない問題を修正</strong>: <code>webui_user_id</code> にメッセージアプリのユーザーIDを設定すると <code>isWebuiUser</code> が true になり通知がブラウザチャット側にのみ飛んでいた。<code>platform !== "webui"</code> を使うよう変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong>返信遅延設定時にAIが「X時間も音沙汰なし」と誤認する問題を修正</strong>: 孤独プッシュの「沈黙時間」をユーザーの最終発言ではなく「AIの最終返信からの経過時間」に変更。返信遅延中の場合はその旨をプロンプトに注記し、ユーザーへの誤った言及を防止。</li>
+      </ul>
+      <div class="section-title">🎨 UI改善</div>
+      <ul>
+        <li><span class="badge badge-change">ui</span><strong>ヘルスチェック結果の表示を整形済みテキストに変更</strong>: 生JSONではなく、先頭に ✅/⚠️ 全体サマリー → 要確認項目（強調）→ 正常項目の順に整形して表示。問題箇所が一目でわかるように。</li>
+        <li><span class="badge badge-feat">feat</span><strong>許可ユーザーID設定欄に「最近会話したユーザー候補」を表示</strong>: <code>user_state</code> から最近会話した上位5件のユーザーIDを候補チップで表示。クリックで許可ユーザー欄に追記（重複なし）。<code>channel_merge</code> ON時も正しく動作。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.12.0 -->
   <div class="version-block">
     <div class="version-header">
@@ -85,6 +109,11 @@ code{
       <ul>
         <li><span class="badge badge-change">ui</span><strong>「感情の振れ幅」と「Temperature」を統合</strong>: <code>char_temp_bias</code>（感情の振れ幅）は <code>temperature</code> に乗算するだけの冗長な設定だったため削除。<code>temperature</code> のラベルを「感情の振れ幅」に変更し、1つのスライダーで完結するよう整理。</li>
         <li><span class="badge badge-change">ui</span><strong>診断レポートのpush表示を <code>8/5 ⚠️上限超</code> 形式に変更</strong>: 日次push上限の消費状況が一目でわかるように。</li>
+        <li><span class="badge badge-change">refactor</span><strong>設定 <code>active_mode</code> を廃止し <code>messaging_mode</code> / <code>webui_mode</code> に分割</strong>: メッセージアプリとブラウザチャットそれぞれで「遠距離/近距離」の振る舞いを独立して設定可能に。チャネル統合（旧 unified）はデフォルト動作になり設定不要。</li>
+        <li><span class="badge badge-change">refactor</span><strong>UI全体の「WebUI」表記を「ブラウザチャット」に統一</strong>: ラベル・説明文・ユーザー向けメッセージを統一。コードの識別子（config キー・関数名・platform値）は変更なし。</li>
+        <li><span class="badge badge-change">refactor</span><strong>DRY整理（内部リファクタリング）</strong>: LLMエンジンディスパッチテーブル導入（<code>callLLM</code>/<code>callSubLLM</code>の3箇所重複if-elseを統一）、<code>EQ_COLS</code>/<code>EMPTY_USER_MSG_FALLBACK</code> 定数化、<code>_getWebUIUserId_</code>/<code>_webuiResponse_</code>/<code>_logWebUIQueue_</code>/<code>_getMaxTokens_</code>/<code>_tsFull_</code> 等ヘルパー関数化。（1.12.0.7）</li>
+        <li><span class="badge badge-fix">fix</span><strong>診断レポート <code>daily_push_limit</code> チェックの <code>ReferenceError</code> を修正</strong>: <code>_healthCheck_</code> 内で <code>conf</code> が未定義のまま参照していたバグを修正。<code>CONFIG["daily_push_limit"]</code> に変更。（1.12.0.8）</li>
+        <li><span class="badge badge-fix">fix</span><strong>ヘルスチェックのトリガーハートビートが常に ℹ️ になる問題を修正</strong>: ハートビート記録を <code>scheduledCheck()</code>（10分間隔）から <code>scheduledEveryMinute()</code>（1分間隔）の先頭に移動。（1.12.0.9）</li>
       </ul>
     </div>
   </div>
