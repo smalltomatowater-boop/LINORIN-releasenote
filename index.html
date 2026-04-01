@@ -58,10 +58,10 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
-  <!-- v1.13.1 -->
+  <!-- v1.13.2 -->
   <div class="version-block">
     <div class="version-header">
-      <span class="version-num">v1.13.1</span>
+      <span class="version-num">v1.13.2</span>
       <span class="version-date">(2026-04-01)</span>
     </div>
     <div class="version-body">
@@ -69,6 +69,9 @@ code{
       <ul>
         <li><span class="badge badge-fix">fix</span><strong>キュー遅延後の返信でAIが時間帯を誤認する問題を修正</strong>: メッセージ受信から30分以上経って処理された場合、システムプロンプトに「このメッセージはXX:XXに受信」という注記を注入。処理時刻ではなく受信時刻を質問の時間帯として判断するように。</li>
         <li><span class="badge badge-fix">fix</span><strong>同じメッセージが数時間後に再送信される問題を修正</strong>: <code>processQueue</code> で <code>handleMessage</code> 成功後にクリーンアップ例外が発生するとキューエントリが <code>queued</code> に戻り再処理されていた。成功/失敗の判定を独立した try-catch に分離し、成功時は必ず <code>done</code> にマークするよう変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong>深夜プッシュ停止設定で他の時間帯もミュートになる問題を修正</strong>: 「夜の開始時刻」を 0 や 1 に設定すると夕方〜夜の時間帯もミュート扱いになっていた。深夜判定を midnight wrap 対応に変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong>チャネル統合 ON 時に旧 localuser が孤立 ID として push される問題を修正</strong>: <code>webui_user_id</code> を設定済みの場合、旧 <code>localuser</code> エントリを push 対象からスキップするよう変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong>チャネル統合 ON にしても会話履歴が引き継がれない問題を修正</strong>: 設定保存時に「チャネル統合」が OFF→ON に変化した場合、または ON のまま <code>webui_user_id</code> が変更された場合、会話履歴・ユーザー状態を新しい ID に自動マイグレーション。メッセージアプリを変更しても記憶が引き継がれるように。</li>
       </ul>
       <div class="section-title">✨ 新機能</div>
       <ul>
