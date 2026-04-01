@@ -58,6 +58,20 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.13.3 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.13.3</span>
+      <span class="version-date">(2026-04-01)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>メッセージが数時間後に再送される問題を根本修正</strong>: 内部状態更新処理が一時的なエラーで失敗するとメッセージ未送信のままキューに戻り、数時間後に再処理・再送されることがあった。状態更新を non-fatal 扱いにし、エラーが発生してもメッセージ送信は必ず実行されるよう変更。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.13.2 -->
   <div class="version-block">
     <div class="version-header">
