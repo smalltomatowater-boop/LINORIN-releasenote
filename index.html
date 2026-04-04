@@ -58,6 +58,20 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.13.5 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.13.5</span>
+      <span class="version-date">(2026-04-04)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><strong>WebUI の userId 変更時に過去の会話履歴が表示されなくなる問題を修正</strong>: <code>setup()</code> 実行時に <code>localuser</code> や過去の <code>webui_user_id</code> を現在の <code>webui_user_id</code> に自動統合。WebUI で「AIの回答が消えた」ように見える問題を解決。<code>_migrateWebuiLogs_()</code> 関数が <code>conversation_logs</code> と <code>user_states</code> の古い WebUI 関連 userId を統合。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.13.4 -->
   <div class="version-block">
     <div class="version-header">
