@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.13.4 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.13.4</span>
+      <span class="version-date">(2026-04-04)</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">✨ 新機能</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><strong>WebUI チャットにエラー時の再送信ボタンを追加</strong>: エラー発生時にリトライボタンを表示。最後のメッセージを再送信（会話ログから重複削除して再実行）し、AIから見て重複発言にならないよう改善。</li>
+        <li><span class="badge badge-feat">feat</span><strong>WebUI チャットに画面リロードボタンを追加</strong>: ヘッダーに常時表示（一時セッションボタンの左側）。タップで画面全体をリロード。</li>
+        <li><span class="badge badge-feat">feat</span><strong>WebUI チャットにタイムアウト処理を追加</strong>: 送信後60秒経過でタイムアウトエラーを表示。「入力中...」インジケータが永遠に残る問題を解決。</li>
+        <li><span class="badge badge-feat">feat</span><strong>WebUI チャットのエラーメッセージを詳細化</strong>: 503エラー、タイムアウト、その他エラーを判別して適切なメッセージを表示。エラー原因がわかりやすく。</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.13.3 -->
   <div class="version-block">
     <div class="version-header">
@@ -67,7 +84,7 @@ code{
     <div class="version-body">
       <div class="section-title">🐛 バグ修正</div>
       <ul>
-        <li><span class="badge badge-fix">fix</span><strong>メッセージが数時間後に再送される問題を根本修正</strong>: 内部状態更新処理が一時的なエラーで失敗するとメッセージ未送信のままキューに戻り、数時間後に再処理・再送されることがあった。状態更新を non-fatal 扱いにし、エラーが発生してもメッセージ送信は必ず実行されるよう変更。</li>
+        <li><span class="badge badge-fix">fix</span><strong>メッセージが数時間後に再送される問題を根本修正</strong>: <code>clear503State</code> や <code>updateUserState</code> が一時的な SpreadsheetApp エラーで例外を投げると <code>handleMessage</code> が終了し、メッセージ未送信のままキューに戻っていた。両関数を try-catch で保護し、エラーが発生してもメッセージ送信（<code>sendByPlatform</code>）は必ず実行されるよう変更。</li>
       </ul>
     </div>
   </div>
@@ -85,7 +102,7 @@ code{
         <li><span class="badge badge-fix">fix</span><strong>同じメッセージが数時間後に再送信される問題を修正</strong>: <code>processQueue</code> で <code>handleMessage</code> 成功後にクリーンアップ例外が発生するとキューエントリが <code>queued</code> に戻り再処理されていた。成功/失敗の判定を独立した try-catch に分離し、成功時は必ず <code>done</code> にマークするよう変更。</li>
         <li><span class="badge badge-fix">fix</span><strong>深夜プッシュ停止設定で他の時間帯もミュートになる問題を修正</strong>: 「夜の開始時刻」を 0 や 1 に設定すると夕方〜夜の時間帯もミュート扱いになっていた。深夜判定を midnight wrap 対応に変更。</li>
         <li><span class="badge badge-fix">fix</span><strong>チャネル統合 ON 時に旧 localuser が孤立 ID として push される問題を修正</strong>: <code>webui_user_id</code> を設定済みの場合、旧 <code>localuser</code> エントリを push 対象からスキップするよう変更。</li>
-        <li><span class="badge badge-fix">fix</span><strong>チャネル統合 ON にしても会話履歴が引き継がれない問題を修正</strong>: 設定保存時に「チャネル統合」が OFF→ON に変化した場合、または ON のまま <code>webui_user_id</code> が変更された場合、会話履歴・ユーザー状態を新しい ID に自動マイグレーション。メッセージアプリを変更しても記憶が引き継がれるように。</li>
+        <li><span class="badge badge-fix">fix</span><strong>チャネル統合 ON にしても会話履歴が引き継がれない問題を修正</strong>: 設定保存時に <code>channel_merge</code> が OFF→ON に変化した場合、または ON のまま <code>webui_user_id</code> が変更された場合、<code>conversation_logs</code> と <code>user_state</code> の既存エントリを新しい ID に自動マイグレーション。メッセージアプリを変更しても会話履歴・記憶が引き継がれるように。</li>
       </ul>
       <div class="section-title">✨ 新機能</div>
       <ul>
