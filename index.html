@@ -60,6 +60,33 @@ code{
 
   <!-- v1.14.5 -->
   <!-- v1.15.0 -->
+  <!-- v1.15.1 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.15.1</span>
+      <span class="version-date">2026-04-09</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">New Feature</div>
+      <ul>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>テラリウムキャラクターを JSON 配列で管理 — 無制限にキャラクター追加・削除が可能に</li>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>キャラクター編集ツール — モーダル UI で直感的にキャラクターを管理</li>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>関係性（relation）フィールド — 各キャラクターの掲示板内での立場を設定可能（デフォルト：「ここの掲示板の住人」）</li>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>パートナー用関係性設定 — terrarium_partner_relation を追加</li>
+      </ul>
+      <div class="section-title">Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>_getGuestBots() を JSON 配列解析に変更（後方互換モード付き）</li>
+      </ul>
+      <div class="section-title">Internal</div>
+      <ul>
+        <li class="change-change"><span class="badge badge-change">new</span>terrariumMigrateBots() — 旧形式から JSON へ移行</li>
+        <li class="change-change"><span class="badge badge-change">new</span>getTerrariumBotsConfig() / saveTerrariumBotsConfig() — 編集ツール用 API</li>
+        <li class="change-change"><span class="badge badge-change">change</span>Config UI にキャラクター編集モーダルを追加</li>
+      </ul>
+    </div>
+  </div>
+
   <div class="version-block">
     <div class="version-header">
       <span class="version-num">v1.15.0</span>
