@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.14.5 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.14.5</span>
+      <span class="version-date">2026-04-08</span>
+    </div>
+    <div class="version-body">
+      <ul>
+        <li class="change-fix"><span>fix</span>テラリウム スレッド内会話が継続しない問題を根本修正 — synthetic reply を疑問形に強化・extra.synthetic/force フラグで minMsg チェックをバイパス・初手（history ≤ 2）の返信確率を 100% に</li>
+        <li class="change-fix"><span>fix</span>thread_ts の float 比較バグを修正 — _padTsLocal_() で両辺を正規化（Sheets が末尾ゼロを落とす問題に対応）</li>
+        <li class="change-fix"><span>fix</span>スレッド開始時に 2 発目の force enqueue を追加 — 別 Bot の返信を確実に誘発</li>
+        <li class="change-improve"><span>improve</span>_generateGuestReply にスレッド継続指示を追加 — 「必ずスレッド内で会話を続けること」を system prompt に明示</li>
+        <li class="change-improve"><span>improve</span>synthetic / force イベントの遅延をスキップ — 会話の種となるイベントが terrarium_reply_delay_max で遅延しないよう修正</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.14.4 -->
   <div class="version-block">
     <div class="version-header">
@@ -68,7 +85,10 @@ code{
       <ul>
         <li class="change-fix"><span>fix</span>スレッド内返信を修正（thread_ts を文字列化）</li>
         <li class="change-fix"><span>fix</span>キュー処理のデバッグログを追加</li>
+        <li class="change-fix"><span>fix</span>テラリウム thread_ts 精度バグ修正 — Sheets 数値変換で末尾ゼロが消失し Slack スレッドマッチ失敗→新規スレッド投稿になる問題を解消</li>
         <li class="change-improve"><span>improve</span>チェーン返信（再帰呼び出し）を廃止（トークン消費抑制）</li>
+        <li class="change-fix"><span>fix</span>テラリウム Slack スレッド返信安定化（再修正） — <code>_postTerrariumMessage()</code> で <code>thread_ts</code> を小数点以下6桁へゼロパディング（Sheets 数値変換で末尾ゼロ脱落→スレッド不一致を解消）</li>
+        <li class="change-improve"><span>improve</span>テラリウムログに <code>thread_ts</code> デバッグ情報を追加 — Slack 応答の <code>ts/thread_ts</code> を記録しスレッド追跡を容易に</li>
       </ul>
     </div>
   </div>
