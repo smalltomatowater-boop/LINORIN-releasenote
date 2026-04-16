@@ -69,6 +69,15 @@ code{
       <ul>
         <li class="change-feat"><span class="badge badge-feat">feat</span>OpenRouter の自動ルーティングオプションを追加 — <code>openrouter/auto</code>（自動選択）と <code>openrouter/free</code>（無料モデル自動選択）をモデル選択に追加。有料ユーザーでも自動ルーティングが使えるようになった</li>
       </ul>
+      <div class="section-title" style="margin-top:16px">Internal Builds</div>
+      <ul>
+        <li><strong>v1.15.8.8</strong> (2026-04-15): fix: user_state 列ズレ修正 — REFLECTION タグ保存先を P 列（16）→ Q 列（17）に修正</li>
+        <li><strong>v1.15.8.6</strong> (2026-04-15): fix: 長期記憶「＜以前＞」が空になる問題を修正 — 初回実行時に user_profile からシード記憶を生成する <code>_seedLongTermMemoryFromProfile_()</code> を追加。mergeLongTermMemory() で oldMemory 空時に自動的に意味記憶・手続き記憶・＜以前＞エピソードを先行生成</li>
+        <li><strong>v1.15.8.5</strong> (2026-04-15): fix: tomorrow_events の文脈ずれ修正 — 日記生成時の「明日」と表示時の「今日/明日」の文脈ずれを修正。tomorrow_events を YYYY-MM-DD フォーマットで保存し、表示時に日付比較</li>
+        <li><strong>v1.15.8.3</strong> (2026-04-15): fix: user_state シートヘッダー不整合 — _migrateUserStateHeaders() でヘッダー不足を自動補充</li>
+        <li><strong>v1.15.8.2</strong> (2026-04-15): レビューレポート修正（記憶品質・プロンプト最適化）— response_language, sanitize(), _callSubLLMInner_, buildBaseContext(), buildReplyPrompt() 等</li>
+        <li><strong>v1.15.8.1</strong> (2026-04-15): improvement: LLMベースの明日イベント検出 — generateDailyDiary() で正規表現からLLM 抽出に変更</li>
+      </ul>
     </div>
   </div>
 
