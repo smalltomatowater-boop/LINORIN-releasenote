@@ -71,6 +71,7 @@ code{
       </ul>
       <div class="section-title" style="margin-top:16px">Internal Builds</div>
       <ul>
+        <li><strong>v1.15.8.9</strong> (2026-04-16): fix: 長期記憶「＜以前＞」を根本修正 — summarizeForMemory() のプロンプトを改善。会話に 7 日前のデータがなくても user_profile から「不明：」付きで基本情報を補完</li>
         <li><strong>v1.15.8.8</strong> (2026-04-15): fix: user_state 列ズレ修正 — REFLECTION タグ保存先を P 列（16）→ Q 列（17）に修正</li>
         <li><strong>v1.15.8.6</strong> (2026-04-15): fix: 長期記憶「＜以前＞」が空になる問題を修正 — 初回実行時に user_profile からシード記憶を生成する <code>_seedLongTermMemoryFromProfile_()</code> を追加。mergeLongTermMemory() で oldMemory 空時に自動的に意味記憶・手続き記憶・＜以前＞エピソードを先行生成</li>
         <li><strong>v1.15.8.5</strong> (2026-04-15): fix: tomorrow_events の文脈ずれ修正 — 日記生成時の「明日」と表示時の「今日/明日」の文脈ずれを修正。tomorrow_events を YYYY-MM-DD フォーマットで保存し、表示時に日付比較</li>
