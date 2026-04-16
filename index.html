@@ -58,6 +58,24 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.15.9 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.15.9</span>
+      <span class="version-date">2026-04-16</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Feature</div>
+      <ul>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>長期記憶「＜以前＞」の改善 — event_queue から過去の発言を抽出。summarizeForMemory() が 7 日前より前のユーザー発言を自動抽出し、実際の会話に基づいた「＜以前＞」を生成</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">Internal Builds</div>
+      <ul>
+        <li><strong>v1.15.9.0</strong> (2026-04-16): new: _getPastEventsFromQueue() 関数追加 — event_queue から status="done" かつ 7 日前より前のイベントを抽出。最大 20 件に制限し重複を除外</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.15.8 -->
   <div class="version-block">
     <div class="version-header">
