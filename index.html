@@ -58,6 +58,55 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.16.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.0</span>
+      <span class="version-date">2026-04-17</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Bug Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>Slack メッセージが event_queue で処理されない問題を根本修正 — source 判定をオブジェクト対応に変更</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>孤独モードでユーザーメッセージが滞留する問題を修正 — 孤独度ベースの遅延時間計算に変更（永続滞留なし）</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>遅延中の自発 Push 抑制 — event_queue に未処理メッセージがある間は Push を送らない</li>
+      </ul>
+      <div class="section-title">New Feature</div>
+      <ul>
+        <li class="change-new"><span class="badge badge-new">new</span>conversation_logs 自動アーカイブ — max_log_rows 超過時、先頭 80% を別スプレッドシートに退避</li>
+        <li class="change-new"><span class="badge badge-new">new</span>_calcLonelinessDelayMin_() — 孤独度に基づく遅延時間計算（寂しい→短い遅延、寂しくない→長い遅延）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.15.12 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.15.12</span>
+      <span class="version-date">2026-04-16</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Improvement</div>
+      <ul>
+        <li class="change-improve"><span class="badge badge-improve">improve</span>RAG エントリ追加・削除を軽量化 — 保存処理をスキップし、セクション更新のみで反映。入力値も保持されるようになった</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">Internal Builds</div>
+      <ul>
+        <li><strong>v1.15.12.10</strong> (2026-04-17): fix: trimLogs のアーカイブロジック改善 — 超えた分だけでなく、先頭から 80% をアーカイブし 20% を残すように変更。頻繁なトリムを防止</li>
+        <li><strong>v1.15.12.9</strong> (2026-04-17): add: check-archives 診断 API — Drive にアーカイブされた会話ログを確認できる</li>
+        <li><strong>v1.15.12.8</strong> (2026-04-17): add: add-test-logs 診断 API — テスト用に会話ログを 100 行追加</li>
+        <li><strong>v1.15.12.7</strong> (2026-04-17): fix: convlogs 診断 API — getCONFIG() を呼び出して max_log_rows を正しく取得</li>
+        <li><strong>v1.15.12.6</strong> (2026-04-17): add: convlogs 診断 API — ?page=diag&target=convlogs で会話ログの行数を確認</li>
+        <li><strong>v1.15.12.5</strong> (2026-04-17): add: trimlogs 診断API — ?page=diag&target=trimlogs で trimLogs() を手動実行可能に</li>
+        <li><strong>v1.15.12.4</strong> (2026-04-17): new: conversation_logs の自動アーカイブ — trimLogs() が行数制限を超えたログを別スプレッドシートに保存してから削除。LINORIN_Workspace フォルダに保存</li>
+        <li><strong>v1.15.12.3</strong> (2026-04-16): fix: RAG エントリが空文字列の場合に表示されない問題を修正 — getConfigSchema() の RAG 検出ロジックを改善</li>
+        <li><strong>v1.15.12.2</strong> (2026-04-16): fix: addMetaTag のキャッシュ制御を削除 — GAS HtmlService で使用できないメタタグのため、HTML ファイル側の meta タグに依存</li>
+        <li><strong>v1.15.12.1</strong> (2026-04-16): fix: HTML キャッシュ問題に対応 — doGet() で addMetaTag() を使用してキャッシュ無効化ヘッダーを追加</li>
+        <li><strong>v1.15.12.0</strong> (2026-04-16): 本リリース</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.15.11 -->
   <div class="version-block">
     <div class="version-header">
