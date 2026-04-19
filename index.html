@@ -58,6 +58,43 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.16.3 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.3</span>
+      <span class="version-date">2026-04-19</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Improvement</div>
+      <ul>
+        <li class="change-change"><span class="badge badge-change">change</span>スロット抽選ロジック削除 — ユーザーメッセージに対する「即返信/遅延返信/既読スルー」抽選を削除。すべての返信を自発 Push のタイミングに統一</li>
+        <li class="change-change"><span class="badge badge-change">change</span>Push ロジックへの統一 — ユーザーメッセージ到達時は会話ログ記録 + lastInteraction 更新のみ実行。返信は scheduledCheck の孤独度判定に委ねる</li>
+      </ul>
+      <div class="section-title">Bug Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>寂しさゲージ遅延が効いていない問題を根本修正 — スロット抽選により常に最大遅延が適用されていた問題を、Push ベース返信へ統一することで解消</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.16.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.2</span>
+      <span class="version-date">2026-04-17</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Bug Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>Push 通知が Slack/LINE ユーザーに送信されない問題を修正 — isWebuiUser 判定を MESSAGING_PLATFORM === "webui" の場合のみに制限</li>
+      </ul>
+      <div class="section-title">Internal</div>
+      <ul>
+        <li>v1.16.1.x の累積修正を正式リリース（遅延ロジック・日記生成・スロット返信・署名二重出力など）</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.16.1 -->
   <div class="version-block">
     <div class="version-header">
@@ -69,6 +106,14 @@ code{
       <ul>
         <li class="change-fix"><span class="badge badge-fix">fix</span>ユーザーメッセージが競合ロックで消滅する問題を修正 — throw Error でリトライさせるように変更</li>
         <li class="change-fix"><span class="badge badge-fix">fix</span>遅延 0 設定でも 1 分遅延する問題を修正 — 0 分を許容するように計算式を修正</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>日記生成でサブ AI エンジンが使用されない問題を修正 — OpenRouter keyCheck を改善し SUB_OPENROUTER_MODEL 対応</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>寂しさゲージによる遅延が効いていない問題を修正 — _calcLonelinessDelayMin_ の Math.max(1,...) 除去、孤独度に応じた遅延を有効化</li>
+        <li class="change-refactor"><span class="badge badge-change">refactor</span>寂しさゲージ遅延ロジック統一 — Push/返信を共通関数に統合、低孤独度時は「次の Push まで待機」を実装</li>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>返信ロジックをスロット抽選に改善 — 「即返信 20%」「遅延返信 60%」「既読スルー 20%」の 3 択をランダム抽選。既読スルー時はログのみ記録</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>既読スルー時に lastInteraction を更新 — lonely_ceiling_min（天井時間）のタイマーを正しく動作させ、指定時間経過後に必ず自発 Push が発動するように修正</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>日記生成で署名が二重出力されるバグ修正 — getPastDiarySnippet で署名を除外、generateDailyDiary で LLM 出力をサニタイズ</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>チャネル統合時に Push が 2 重送信される問題を修正 — scheduledCheck で WebUI ユーザーからの Push 発火をスキップ</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>Push が送信されない問題を修正 — isWebuiUser 判定が Slack 等でも誤って発動していたため、MESSAGING_PLATFORM === "webui" の場合のみに制限</li>
       </ul>
     </div>
   </div>
