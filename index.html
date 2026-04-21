@@ -58,7 +58,49 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
-  <!-- v1.16.3 -->
+    <!-- v1.16.6 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.6</span>
+      <span class="version-date">2026-04-21</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Bug Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>日記 PDF 生成：LLM 出力の末尾 "---" / "Written by" を安全に除去 — replace から lastIndexOf + substring に変更、本文中の誤爆防止</li>
+      </ul>
+    </div>
+  </div>
+
+    <!-- v1.16.5 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.5</span>
+      <span class="version-date">2026-04-20</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Feature</div>
+      <ul>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>LLM エンジン別 推論モード制御 — Gemini/OpenAI/Anthropic/OpenRouter 各エンジンの思考プロセス（Chain of Thought）出力を ON/OFF 可能に</li>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>WebUI 思考プロセス表示 — 思考プロセスをアコーディオン UI で表示。普段は隠れていて、クリックすると展開可能</li>
+      </ul>
+      <div class="section-title">Improvement</div>
+      <ul>
+        <li class="change-change"><span class="badge badge-change">change</span>CONFIG 追加：GEMINI_THINKING, OPENAI_THINKING, ANTHROPIC_THINKING, OPENROUTER_THINKING</li>
+        <li class="change-change"><span class="badge badge-change">change</span>callLLM 系関数更新：各モデルの thinking/reasoning パラメータに対応</li>
+        <li class="change-change"><span class="badge badge-change">change</span>sanitize 関数強化：英語思考プロセス・メタテキスト（Draft/Plan/Analysis）を自動除去</li>
+        <li class="change-change"><span class="badge badge-change">change</span>chat_ui.html 更新：renderMessageHtml 関数で思考プロセスを自動検出し &lt;details&gt; タグで表示</li>
+      </ul>
+      <div class="section-title">Bug Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>Anthropic 温度パラメータ：Claude 3.7+ の思考モード有効時は temperature を送信しないように修正</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>OpenAI 推論モデル：o1/o3-mini で temperature が無効な問題に対応</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>一時チャット表示バグ：一時セッション中にメッセージが表示されない問題を修正</li>
+      </ul>
+    </div>
+  </div>
+
+<!-- v1.16.3 -->
   <div class="version-block">
     <div class="version-header">
       <span class="version-num">v1.16.3</span>
