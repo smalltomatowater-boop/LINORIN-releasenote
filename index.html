@@ -58,6 +58,24 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+    <!-- v1.16.9 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.9</span>
+      <span class="version-date">2026-04-22</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Bug Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>processQueue 返信遅延ロジックを正常化 — reply_loneliness_mode=TRUE で _calcLonelinessDelayMin_() を使用</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>buildMetadata() の silenceHours 計算を修正 — AI/ユーザー最終発言の新しい方を基準に経過時間</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>Push 時会話履歴取得範囲を拡張 — 最低 24 時間分を取得</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>handleMessage 競合ロックの例外処理を改善 — ロック競合時に例外スローしキューを queued に戻す</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>scheduledCheck pendingUserIds 判定を厳密化 — scheduledAt（列 13）で遅延待機中を判定</li>
+      </ul>
+    </div>
+  </div>
+
     <!-- v1.16.8 -->
   <div class="version-block">
     <div class="version-header">
