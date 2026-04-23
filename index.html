@@ -58,6 +58,27 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.16.13 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.13</span>
+      <span class="version-date">2026-04-23</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Bug Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>processQueue シート名タイポ修正 — getSheet("user_states") → getSheet("user_state")、ユーザー状態取得できず寂しさゲージ機能していなかった問題を解消</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>返信遅延上限の自動補正 — reply_delay_max_min が 0 または空欄でも、寂しさゲージ ON 時はデフォルト 10 分を自動適用、Slack 即時返信問題を解消</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>event_queue カラム定義更新 — scheduledAt 列を正式に追加、遅延時刻を安全に保存</li>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>キュー詰まり検知に scheduledAt チェック追加 — 遅延待ちのメッセージをスタックと誤認しないよう除外</li>
+      </ul>
+      <div class="section-title">Feature</div>
+      <ul>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>設定 UI 説明文を改善 — reply_delay_max_min と reply_loneliness_mode の説明を誤解を招かない表現に修正</li>
+      </ul>
+    </div>
+  </div>
+
     <!-- v1.16.11 -->
   <div class="version-block">
     <div class="version-header">
