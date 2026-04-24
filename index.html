@@ -58,6 +58,50 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.16.15 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.15</span>
+      <span class="version-date">2026-04-24</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Feature</div>
+      <ul>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>困ったタブを追加 — 設定画面に「困った」タブを追加、診断ツールをまとめ</li>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>症状から診断 — 「返事が来ない」「プッシュが来ない」「日記ができない」の 3 症状に対応</li>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>個別診断ツール — ヘルスチェック（11 項目）、キュー詰まり解除、全プラットフォーム送信テスト</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.16.14.5 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.14.5</span>
+      <span class="version-date">2026-04-24</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>Config UI 説明文を修正 — reply_loneliness_mode の説明を「OFF は返信遅延・上限で動作」に修正</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.16.14.3 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.14.3</span>
+      <span class="version-date">2026-04-24</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>Config UI 説明文を修正 — reply_delay_max_min と reply_loneliness_mode の説明を、実際の挙動と一致するよう修正</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.16.14 -->
   <div class="version-block">
     <div class="version-header">
@@ -65,6 +109,10 @@ code{
       <span class="version-date">2026-04-23</span>
     </div>
     <div class="version-body">
+      <div class="section-title">Important Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-fix">fix</span>返信遅延ロジックの分離 — ユーザーメッセージへの返信は reply_delay_max_min でランダム遅延、自発 Push は寂しさゲージで制御。両者の影響を完全分離し、設定が意図通りに動作するよう修正</li>
+      </ul>
       <div class="section-title">Feature</div>
       <ul>
         <li class="change-feat"><span class="badge badge-feat">feat</span>返信遅延ロジックの見直し — ユーザーの返信遅延設定を再評価し、より自然な応答リズムに調整</li>
