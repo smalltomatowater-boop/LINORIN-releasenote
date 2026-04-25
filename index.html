@@ -58,6 +58,76 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.16.18 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.18</span>
+      <span class="version-date">2026-04-25</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">New Feature</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span>シャドウ強度スライダー追加 — チャットUI・設定UIにシャドウ強度スライダー（0〜100%）を追加。箱影と文字シャドウを一元制御</li>
+      </ul>
+      <div class="section-title">Bug Fix</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span>メール通知のタイミングプルダウン修正 — オプションラベルが逆になっていた問題を修正</li>
+        <li><span class="badge badge-fix">fix</span>シャドウ設定の残存参照修正 — <code>applyShadowToggle()</code> → <code>applyShadowIntensity()</code></li>
+        <li><span class="badge badge-fix">fix</span>プッシュが来ない診断のシート読み込みエラー修正 — <code>getAllUserStates()</code> に変更</li>
+        <li><span class="badge badge-fix">fix</span>日記ができない診断のDriveフォルダチェック修正 — <code>getDiaryFolder()</code> の実行チェックに変更</li>
+      </ul>
+      <div class="section-title">Improvement</div>
+      <ul>
+        <li><span class="badge badge-change">change</span>「困った」タブのボタンデザイン修正 — 背景色を <code>var(--accent)</code> に変更</li>
+        <li><span class="badge badge-change">change</span>APIキー診断に grok/openrouter/glm/sakura を追加</li>
+        <li><span class="badge badge-change">change</span>force-pushツールで <code>processQueue()</code> を即実行</li>
+        <li><span class="badge badge-change">change</span><code>doGet</code> ルーティングに diag ターゲットを追加</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.16.17 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.17</span>
+      <span class="version-date">2026-04-24</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Important Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-change">fix</span>userStateMap ビルドエラー修正 — <code>processQueue()</code> 内の <code>userStateMap</code> 構築で <code>undefined.length</code> エラーが発生する問題を修正</li>
+        <li class="change-fix"><span class="badge badge-change">fix</span>キュー滞留自動処理 — <code>silence_threshold_min</code> を超えたキュー滞留メッセージは <code>force_next_push</code> を自動セットし、次の <code>processQueue()</code> で処理されるように修正</li>
+      </ul>
+      <div class="section-title">UI Improvement</div>
+      <ul>
+        <li class="change-feat"><span class="badge badge-feat">feat</span>シャドウ強度スライダー追加 — チャットUI・設定UI両方にシャドウ強度スライダー（0〜100%）を追加。箱影と文字シャドウの両方を一元制御</li>
+        <li class="change-fix"><span class="badge badge-change">fix</span>メール通知のタイミングプルダウン修正 — オプションラベルが逆になっていた問題を修正。「オフ」「リアルタイム」に修正</li>
+      </ul>
+      <div class="section-title">Diagnostic Tool Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-change">fix</span>「困った」タブのボタンデザイン修正 — 背景色をaccentカラーに変更し、セクションと区別しやすく修正</li>
+        <li class="change-fix"><span class="badge badge-change">fix</span>APIキー診断にgrok/openrouter/glm/sakuraを追加 — <code>LLM_ENGINE=grok</code>などを選択中に「APIキー: 未設定」と誤表示される問題を修正</li>
+        <li class="change-fix"><span class="badge badge-change">fix</span>force-pushツールでprocessQueueを即実行 — 「今すぐ話しかける」実行後、キューの処理が次のトリガー待ちになっていた問題を解消</li>
+      </ul>
+      <div class="section-title">Diagnostic API Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-change">fix</span><code>doGet</code> のルーティングに diag ターゲットを追加 — <code>?page=diag&target=no-reply</code> などが <code>runDiag()</code>/<code>runTool()</code> を呼ぶように修正</li>
+      </ul>
+      <div class="section-title">Diagnostic Tool Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-change">fix</span>プッシュが来ない診断のシート読み込みエラー修正 — <code>getSheet('user_state')</code> の直接読み込みを <code>getAllUserStates()</code> に変更し、空シート時のエラーを解消</li>
+      </ul>
+      <div class="section-title">Config UI Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-change">fix</span>シャドウ設定の残存参照を修正 — <code>applyShadowToggle()</code> を <code>applyShadowIntensity()</code> に変更し、ページ読み込みエラーを解消</li>
+      </ul>
+      <div class="section-title">Diagnostic Tool Fix</div>
+      <ul>
+        <li class="change-fix"><span class="badge badge-change">fix</span>日記ができない診断のDriveフォルダチェック修正 — <code>CONFIG['diary_folder_id']</code> の直接チェックを <code>getDiaryFolder()</code> の実行チェックに変更</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.16.16 -->
   <div class="version-block">
     <div class="version-header">
@@ -69,6 +139,9 @@ code{
       <ul>
         <li class="change-fix"><span class="badge badge-change">fix</span>返信遅延ロジック修正 — <code>reply_loneliness_mode=TRUE</code> 時、寂しさゲージ落選はランダム遅延を設定せずキューに残留し、次ループで再判定。これで「寂しさゲージで当選するまで待機」する挙動に</li>
         <li class="change-fix"><span class="badge badge-change">fix</span>Push 抑制ロジック強化 — <code>scheduledCheck()</code> が EventQueue の <code>scheduledAt=0</code>（寂しさゲージ待機中）も検知し、Push を抑制</li>
+        <li class="change-fix"><span class="badge badge-change">fix</span>v1.16.16.2 — <code>processQueue()</code> 内の <code>getSheet("user_state")</code> → <code>getUserStateSheet()</code> 修正。<code>_migrateUserStateHeaders_()</code> で <code>undefined.length</code> エラーを修正</li>
+        <li class="change-fix"><span class="badge badge-change">fix</span>v1.16.16.2 — silence_threshold_min を超えたキュー滞留メッセージは <code>force_next_push</code> を自動セットし、次の <code>processQueue()</code> で処理されるように修正</li>
+        <li class="change-fix"><span class="badge badge-change">fix</span>v1.16.16.2 — <code>runDiag()</code> と <code>runDiagFromUI()</code> に <code>user_state</code> (アンダースコア) ルーティングを追加</li>
       </ul>
       <div class="section-title" style="margin-top:12px">Feature</div>
       <ul>
