@@ -58,6 +58,32 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.16.19 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.16.19</span>
+      <span class="version-date">2026-04-28</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">New Feature</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span>DeepSeek API 対応 — LLM_ENGINE に「DeepSeek」を追加。OpenAI 互換 Chat Completions API で通信</li>
+        <li><span class="badge badge-feat">feat</span>DeepSeek 推論モード — <code>thinking: enabled</code> + <code>reasoning_effort: high</code> に対応</li>
+        <li><span class="badge badge-feat">feat</span>動的モデル取得 — <code>/models</code> API からモデル一覧を自動取得。到達不能時はフォールバック</li>
+      </ul>
+      <div class="section-title">Bug Fix</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span>過去日記の会話参照修正 — AI側の発言が会話ログに含まれておらず、日記内容が貧弱になっていた問題を解消</li>
+        <li><span class="badge badge-fix">fix</span>日記生成のデフォルトAI修正 — 設定画面の「日記・記憶用AI」を尊重するように修正（以前は Gemini 固定だった）</li>
+      </ul>
+      <div class="section-title">Improvement</div>
+      <ul>
+        <li><span class="badge badge-change">change</span>日記・記憶用サブAIにも DeepSeek を選択可能に</li>
+        <li><span class="badge badge-change">change</span>テラリウムボット設定に DeepSeek エンジンを追加</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.16.18 -->
   <div class="version-block">
     <div class="version-header">
@@ -82,6 +108,9 @@ code{
         <li><span class="badge badge-change">change</span>APIキー診断に grok/openrouter/glm/sakura を追加</li>
         <li><span class="badge badge-change">change</span>force-pushツールで <code>processQueue()</code> を即実行</li>
         <li><span class="badge badge-change">change</span><code>doGet</code> ルーティングに diag ターゲットを追加</li>
+        <li><span class="badge badge-change">change</span>Gemma 4 reasoning→content merge — reasoning_only出力時にreasoningをcontentにマージ</li>
+        <li><span class="badge badge-change">change</span>local_llm_settings.html 削除 — Mac側自動更新のため不要に</li>
+        <li><span class="badge badge-change">change</span>local_llm.js 簡素化 — sidebar/UI関連関数全て削除</li>
       </ul>
     </div>
   </div>
