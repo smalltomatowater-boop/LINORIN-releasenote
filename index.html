@@ -58,6 +58,61 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.18.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.18.2</span>
+      <span class="version-date">2026-05-05</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">寂しさゲージ リンク修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span>config_uiからシミュレーターへの遷移を <code>target="_blank"</code> で新ページ開くに変更</li>
+        <li><span class="badge badge-fix">fix</span>srcdoc iframe 内の location 参照によるクロスオリジンエラーを解消</li>
+      </ul>
+      <div class="section-title">ビルド改善</div>
+      <ul>
+        <li><span class="badge badge-chore">chore</span><code>.claspignore</code> 追加でpush対象ファイルを限定（docs/, debug_tools.js, changelog.html 等を除外）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.18.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.18.0</span>
+      <span class="version-date">2026-05-05</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">寂しさゲージ 可視化ツール</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><code>?page=simulator</code> で寂しさゲージの確率カーブをリアルタイム可視化</li>
+        <li><span class="badge badge-feat">feat</span>鋸のこぎり波パターンで Push→リセット→再上昇 のサイクルを確認</li>
+        <li><span class="badge badge-feat">feat</span>設定画面からワンクリックでアクセス可能</li>
+      </ul>
+      <div class="section-title">確率割り算</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span><code>lonely_probability_divisor</code> 追加（デフォルト1、範囲1-20）</li>
+        <li><span class="badge badge-feat">feat</span>確率を割り算で下げられる — 寂しがり度が低い場合の調整が容易に</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.17.1 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.17.1</span>
+      <span class="version-date">2026-05-04</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Bug Fix</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span>深夜の自発Pushが時間帯重み0でも発火する問題を修正 — <code>force_next_push</code> フラグが時間帯重みチェックをバイパスしていたため、夕方に確率が当たると深夜にPushが発火する問題を解消</li>
+        <li><span class="badge badge-fix">fix</span><code>loadAllConfig</code> で数値0が空文字列に変換される問題を修正 — <code>String(v || "")</code> で <code>v=0</code> のとき <code>""</code> になっていたため、<code>weight_night</code> などの数値設定が空文字列として保存されていた問題を解消</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.17.0 -->
   <div class="version-block">
     <div class="version-header">
@@ -78,6 +133,13 @@ code{
       <div class="section-title">UI修正</div>
       <ul>
         <li><span class="badge badge-fix">fix</span>バブル文字色リロード修正 — 画面リロード時にバブル文字色が白にリセットされる問題を解消</li>
+      </ul>
+      <div class="section-title">Bug Fix (v1.17.0.1)</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span>ヘルスチェック user_state エラー修正 — <code>_migrateUserStateHeaders_</code> が <code>undefined.length</code> でクラッシュする問題を解消</li>
+        <li><span class="badge badge-fix">fix</span>日付指定日記の stale ジョブ自動クリア — 失敗した日記ジョブが残り「既に生成中」になる問題を解消</li>
+        <li><span class="badge badge-fix">fix</span>日記通知のロール修正 — 日記の成功・失敗メッセージを <code>role: "system"</code> に変更し会話履歴から除外</li>
+        <li><span class="badge badge-feat">feat</span>「困った」タブに「日記の生成情報をクリア」ボタンを追加</li>
       </ul>
     </div>
   </div>
