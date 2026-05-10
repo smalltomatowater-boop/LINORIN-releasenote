@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.19.1 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.19.1</span>
+      <span class="version-date">2026-05-10</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">LINE画像送信修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span><code>uploadLineImageToDrive</code> の関数名修正（<code>getWorkspaceFolder()</code> → <code>getLinorinWorkspace()</code>）</li>
+        <li><span class="badge badge-fix">fix</span><code>LINE_IMAGE_FOLDER_ID</code> 設定不要に（LINORIN_Workspace/images を自動作成）</li>
+        <li><span class="badge badge-fix">fix</span>push-test LINEフィルタを <code>userId</code> 比較から <code>platformOrigin</code> 比較に変更</li>
+        <li><span class="badge badge-chore">chore</span>Slack画像送信を <code>files.getUploadURLExternal</code> → upload → <code>files.completeUploadExternal</code> のv2フローに正式移行</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.19.0 -->
   <div class="version-block">
     <div class="version-header">
@@ -87,6 +104,7 @@ code{
       </ul>
       <div class="section-title">内部改善</div>
       <ul>
+        <li><span class="badge badge-chore">chore</span>Slack画像送信を <code>files.getUploadURLExternal</code> → upload → <code>files.completeUploadExternal</code> のv2フローに正式移行</li>
         <li><span class="badge badge-chore">chore</span>デバッグログ強化（画像トリガー/Slackハンドラ/TTS）</li>
         <li><span class="badge badge-chore">chore</span>INTERNAL_VERSION管理改善（<code>checkVersion</code> で内部バージョン変更も検出）</li>
       </ul>
