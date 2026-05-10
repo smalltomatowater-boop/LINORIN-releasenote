@@ -69,7 +69,8 @@ code{
       <ul>
         <li><span class="badge badge-fix">fix</span><code>uploadLineImageToDrive</code> の関数名修正（<code>getWorkspaceFolder()</code> → <code>getLinorinWorkspace()</code>）</li>
         <li><span class="badge badge-fix">fix</span><code>LINE_IMAGE_FOLDER_ID</code> 設定不要に（LINORIN_Workspace/images を自動作成）</li>
-        <li><span class="badge badge-fix">fix</span>push-test LINEフィルタを <code>userId</code> 比較から <code>platformOrigin</code> 比較に変更</li>
+        <li><span class="badge badge-fix">fix</span>push-test LINEフィルタをuserId長さ判定（33文字=LINE）に変更</li>
+        <li><span class="badge badge-feat">feat</span><code>sendTelegramImage</code> 関数追加、画像生成トリガー/push-testでTelegram画像送信対応</li>
         <li><span class="badge badge-chore">chore</span>Slack画像送信を <code>files.getUploadURLExternal</code> → upload → <code>files.completeUploadExternal</code> のv2フローに正式移行</li>
       </ul>
     </div>
