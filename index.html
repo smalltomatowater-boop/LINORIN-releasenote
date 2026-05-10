@@ -58,18 +58,86 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.19.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.19.0</span>
+      <span class="version-date">2026-05-10</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">自撮り画像生成 機能強化</div>
+      <ul>
+        <li><span class="badge badge-new">new</span>画像生成プロンプト作成時に直近24時間の会話を参照（毎回同じような画像になる問題を解消）</li>
+        <li><span class="badge badge-new">new</span>「照れてる」「恥ずかしい」などの感情・ムード指定を画像生成に反映</li>
+        <li><span class="badge badge-improve">improve</span>Slackの画像送信にfiles.upload（multipart/form-data）を使用するように復旧</li>
+        <li><span class="badge badge-new">new</span>push-testに画像生成テストを追加（生成＋全プラットフォーム送信）</li>
+      </ul>
+      <div class="section-title">LINE画像生成修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span>LINE Messaging APIはdata URL非対応のため、Google Driveにアップロードして公開URLで送信する方式に変更（<code>LINE_IMAGE_FOLDER_ID</code> にフォルダIDを設定）</li>
+      </ul>
+      <div class="section-title">画像生成会話ログ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span>画像生成トリガー時にAI返答がconversation_logsに保存されていなかった問題を修正（全プラットフォーム対応）</li>
+      </ul>
+      <div class="section-title">Gemini TTS修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span>Gemini TTSモデルフィルタを <code>/^gemini.*tts/</code> に変更し、TTS対応モデルのみ抽出</li>
+        <li><span class="badge badge-improve">improve</span><code>_callGeminiTTS_</code> にデバッグログ追加</li>
+      </ul>
+      <div class="section-title">内部改善</div>
+      <ul>
+        <li><span class="badge badge-chore">chore</span>デバッグログ強化（画像トリガー/Slackハンドラ/TTS）</li>
+        <li><span class="badge badge-chore">chore</span>INTERNAL_VERSION管理改善（<code>checkVersion</code> で内部バージョン変更も検出）</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.18.3 -->
   <div class="version-block">
     <div class="version-header">
       <span class="version-num">v1.18.3</span>
-      <span class="version-date">2026-05-05</span>
+      <span class="version-date">2026-05-08</span>
     </div>
     <div class="version-body">
+      <div class="section-title">画像生成機能強化</div>
+      <ul>
+        <li><span class="badge badge-new">new</span>自撮りトリガー単語を設定から変更可能に（<code>IMAGE_GENERATION_TRIGGER_WORD</code>、正規表現対応）</li>
+        <li><span class="badge badge-new">new</span>画像生成時のデフォルト台詞を設定可能に（<code>IMAGE_GENERATION_DEFAULT_MESSAGE</code>）</li>
+        <li><span class="badge badge-improve">improve</span>自撮りトリガー時、サブLLMが画像プロンプトと同時にキャラクターの台詞を生成</li>
+        <li><span class="badge badge-improve">improve</span>画像生成プロンプト作成時に直近24時間の会話を参照してバリエーションを出すように改良（毎回同じような画像になる問題を解消）</li>
+        <li><span class="badge badge-improve">improve</span>「照れてる」「恥ずかしい」などの感情・ムード指定を画像生成に反映</li>
+        <li><span class="badge badge-fix">fix</span>自撮りトリガー時にWebUIではなくSlackに画像を送信するように修正</li>
+        <li><span class="badge badge-fix">fix</span>LINE画像生成：LINE Messaging APIはdata URL非対応のため、Google Driveにアップロードして公開URLで送信する方式に変更（<code>LINE_IMAGE_FOLDER_ID</code> にフォルダIDを設定）</li>
+        <li><span class="badge badge-new">new</span>sendSlackImageにデバッグログ追加（Slack画像送信トラブルシューティング用）</li>
+      </ul>
       <div class="section-title">寂しさゲージ / app_url 修正</div>
       <ul>
+        <li><span class="badge badge-fix">fix</span>キューエラー自動クリア時に <code>force_next_push</code> フラグが残留して深夜Pushする問題を修正</li>
+        <li><span class="badge badge-fix">fix</span><code>scheduledCheck()</code>/<code>processQueue()</code> の <code>user_state</code> 読み書き競合を <code>LockService</code> で保護</li>
         <li><span class="badge badge-fix">fix</span><code>_autoUpdateDeployedUrl</code> が <code>app_url</code> を自動上書きする問題を修正 — 設定済みのURLを保護</li>
         <li><span class="badge badge-fix">fix</span><code>?page=config</code> 直接アクセスと <code>buildConfigHTML()</code> で <code>{{SIMULATOR_URL}}</code> テンプレート置換漏れを修正</li>
         <li><span class="badge badge-fix">fix</span>CacheServiceの1時間キャッシュによる古い値の読み込み問題を、手動クリアエンドポイントで対応</li>
+      </ul>
+      <div class="section-title">画像生成バグ修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span>Grok APIで画像生成が常に失敗する問題を修正 — <code>_callOpenAICompatImage_</code> が送信する <code>size</code> パラメータをGrok APIには送らないように修正</li>
+      </ul>
+      <div class="section-title">Webチャット AI音声読み上げ</div>
+      <ul>
+        <li><span class="badge badge-new">new</span>TTSエンジン対応（OpenAI / Grok / Gemini） — <code>TTS_ENGINE</code> で選択、<code>TTS_MODEL</code>、<code>TTS_VOICE</code> で設定</li>
+        <li><span class="badge badge-new">new</span>WebチャットのAIメッセージに🔊再生ボタン、ツールパネルにON/OFFトグル追加</li>
+        <li><span class="badge badge-new">new</span>「困った」タブに音声生成テストボタン追加（生のHTTPエラー表示付き）</li>
+        <li><span class="badge badge-improve">improve</span>トグルONで新着AIメッセージを自動で音声化</li>
+      </ul>
+      <div class="section-title">チャット画像共有修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span>画像生成結果が「[画像]」テキストのみ表示される不具合を修正 — Slackは<code>files.upload</code> APIで画像アップロード、WebUIはbase64画像データを会話ログに埋めてインライン表示</li>
+      </ul>
+      <div class="section-title">ビルド改善</div>
+      <ul>
+        <li><span class="badge badge-chore">chore</span>push-testの <code>llm_reply</code> が <code>[object Object]</code> になる問題を修正</li>
+        <li><span class="badge badge-chore">chore</span><code>.claspignore</code> 追加でpush対象ファイルを限定（docs/, debug_tools.js, changelog.html 等を除外）</li>
       </ul>
     </div>
   </div>
