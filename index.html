@@ -58,6 +58,53 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.19.3 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.19.3</span>
+      <span class="version-date">2026-05-11</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">大規模バグ修正 + モデルフィルタ改善</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <code>shouldPush()</code> 未定義変数（<code>boostMin</code>/<code>boostMax</code>/<code>curvePower</code>/<code>lonelyFactor</code>/<code>probDivisor</code>）修正</li>
+        <li><span class="badge badge-fix">fix</span> 日記画像生成 — <code>callSubLLM</code> の不適切レスポンスフィルタリング + フォールバック追加</li>
+        <li><span class="badge badge-fix">fix</span> <code>secret_spice</code> Base64文字化け → 生UTF-8テキスト化（Claude NG判定問題対応）</li>
+        <li><span class="badge badge-fix">fix</span> Gemini Imagen API — <code>:predict</code> エンドポイント + レスポンス形式修正</li>
+        <li><span class="badge badge-fix">fix</span> TTSモデルフィルタ — エンジン別（OpenAI/Grok/Gemini）完全分離</li>
+        <li><span class="badge badge-fix">fix</span> 画像生成モデルフィルタ — エンジン別（ChatGPT/Grok/Gemini）完全分離</li>
+        <li><span class="badge badge-fix">fix</span> <code>linorin_src/</code> 二重定義 — <code>.claspignore</code> 追加 + GASから10ファイル削除</li>
+        <li><span class="badge badge-fix">fix</span> セットアップウィザード — ScriptProperties: <code>.env</code> + <code>clasp push</code> 方式に変更</li>
+        <li><span class="badge badge-fix">fix</span> セットアップウィザード — WebアプリURL抽出に <code>clasp deployments</code> fallback追加</li>
+        <li><span class="badge badge-fix">fix</span> <code>add_emotion</code> — 「いのちの電話禁止」指示削除（Claude NG判定問題対応）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v1.19.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.19.2</span>
+      <span class="version-date">2026-05-11</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">セットアップウィザード追加</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <code>linorin_wizard/</code> 追加 — Python標準ライブラリのみで動くセットアップウィザード（<code>python -m linorin_wizard wizard</code>）</li>
+        <li><span class="badge badge-feat">feat</span> <code>status</code> コマンド — 全コンポーネントの健康状態をチェック</li>
+        <li><span class="badge badge-feat">feat</span> デプロイID自動保存 — 初回デプロイ時にデプロイIDを <code>.linorin_deploy.json</code> に保存し、追記デプロイ時に <code>-i</code> オプションを案内</li>
+        <li><span class="badge badge-feat">feat</span> Windows/mac 両対応</li>
+      </ul>
+      <div class="section-title">不具合修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <code>shouldPush()</code> 未定義変数（<code>boostMin</code>/<code>boostMax</code>/<code>curvePower</code>）修正</li>
+        <li><span class="badge badge-fix">fix</span> 日記画像生成 — <code>callSubLLM</code> の不適切レスポンスフィルタリング + フォールバック追加</li>
+        <li><span class="badge badge-fix">fix</span> <code>secret_spice</code> Base64文字化け → 生UTF-8テキスト化（Claude NG判定問題対応）</li>
+        <li><span class="badge badge-fix">fix</span> Gemini Imagen API — <code>:predict</code> エンドポイント + レスポンス形式修正</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.19.1 -->
   <div class="version-block">
     <div class="version-header">
