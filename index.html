@@ -58,6 +58,25 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.20.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.20.0</span>
+      <span class="version-date">2026-05-12</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">AI自己記憶システム + モデルフィルタ改善</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>AI自己記憶（ai_long_memory）</strong> — 日記からAI自身の経験・感情・成長を自動記録し、system promptに注入</li>
+        <li><span class="badge badge-feat">feat</span> user_stateシートS列（col 19）にAI記憶を保存、dailyReset時に全ユーザー分自動生成</li>
+        <li><span class="badge badge-fix">fix</span> さくらのAIクラウド モデル更新 — Kimi-K2.5 → Kimi-K2.6</li>
+        <li><span class="badge badge-fix">fix</span> スタンドアロンスクリプト対応 — <code>getLinorinSS()</code> ヘルパー追加</li>
+        <li><span class="badge badge-fix">fix</span> TTS/画像生成モデルフィルタ — エンジン別完全分離</li>
+        <li><span class="badge badge-fix">fix</span> ID照合のString()化、ヘッダーmigration修正、memoryBlock undefined連結修正</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.19.3 -->
   <div class="version-block">
     <div class="version-header">
