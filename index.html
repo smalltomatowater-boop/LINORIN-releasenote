@@ -58,6 +58,25 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.20.4 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.20.4</span>
+      <span class="version-date">2026-05-14</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Geminiモデル選択の整理 + 日記AIのドロップダウンフィルタ</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>Geminiモデル一覧から非テキストモデルを除外</strong> — テキストLLM用ドロップダウン（メイン / フォールバック / 日記用）から画像生成・動画・音楽・TTS・埋め込み・ロボティクス・Computer Use・Deep Research などを自動除外</li>
+        <li><span class="badge badge-fix">fix</span> <strong>「[有料]」ラベル判定</strong> — <code>gemini-2.5-pro-preview-*</code> など preview / latest 接尾辞付きのproモデルも正しく有料扱いに</li>
+        <li><span class="badge badge-change">change</span> <strong>モデル並び順を整理</strong> — 無料グループ→有料グループ、各グループ内はバージョン降順→variant(pro&gt;flash&gt;flash-lite&gt;gemma)→安定版優先→日付降順</li>
+        <li><span class="badge badge-feat">feat</span> <strong>無料/有料フィルタの動的反映</strong> — <code>GEMINI_FREE_TIER_ONLY</code> トグルがページリロードだけで即反映（モデル再取得不要）</li>
+        <li><span class="badge badge-feat">feat</span> <strong>日記・記憶用AIのドロップダウンフィルタ</strong> — エンジン選択に応じて関係ないサブモデル欄を自動で隠す（空欄＝メインと同じなら全部非表示）</li>
+        <li><span class="badge badge-change">change</span> <strong>Gemini essentials を最新化</strong> — gemini-3-pro / gemini-3-pro-preview / gemini-3-flash を追加</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.20.3 -->
   <div class="version-block">
     <div class="version-header">
