@@ -58,6 +58,22 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.20.5 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.20.5</span>
+      <span class="version-date">2026-05-16</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">Push 2連発の不具合修正 + トリガー稼働診断ツール</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 Push が同時刻に2連発する不具合を修正</strong> — <code>user_state</code> シートに同一userIdの行が複数あると、ほぼ同時刻に Push が2通連続で届くケースを解消。重複行を自動で排除するように</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 必ず話しかける時間で force_next_push が余計に立つ不具合を修正</strong> — 例外時に二重発火するリスクを低減</li>
+        <li><span class="badge badge-feat">feat</span> <strong>⏰ トリガー稼働状況の診断ツール</strong> — 「困ったタブ」に新ボタン。<code>scheduledEveryMinute</code> のハートビートをチェックして HEALTHY / SLOW / BROKEN / MISSING を判定。権限切れによるサイレント停止を一発で検知</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.20.4 -->
   <div class="version-block">
     <div class="version-header">
