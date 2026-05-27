@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.20.8 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.20.8</span>
+      <span class="version-date">2026-05-28</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">LINE プッシュ通知・診断/テスト機能のバグ修正（5件）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 LINE Push が届かない根本原因を修正（channel_merge=ON 時）</strong> — <code>channel_merge=ON</code> のユーザーで LINE Push が一切届かない不具合を修正。<code>getCONFIG()</code> が統合時に <code>webui_user_id</code> を先頭の LINE userId で上書きするため、<code>scheduledCheck</code> の WebUI スキップ判定が LINE ユーザーを WebUI ユーザーと誤認して Push をブロックしていた。WebUI スキップ guard を channel_merge=OFF 専用に変更（統合時は <code>getAllUserStates</code> が localuser 行を除外するため二重 Push の懸念なし）</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 プラットフォーム状態確認・プッシュテストの設定キー名を統一</strong> — 診断/テスト関数の LINE トークンキー名が送信関数と不一致（<code>LINE_CHANNEL_ACCESS_TOKEN</code>）だったため、正しく入力しても「未設定」と表示されていた。送信関数と同じ <code>LINE_ACCESS_TOKEN</code> に統一</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 LINE トークン検証 API を正しいエンドポイントに変更</strong> — LINE Login 用の <code>/v2/oauth/verify</code> を使っていたため Messaging API の Channel Access Token を検証できず「NG（unknown）」になっていた。<code>/v2/bot/info</code>（Bearer 認証）に変更し、成功時は bot の @ID を表示</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 プッシュテストの LINE 送信が実際には送られていなかった不具合を修正</strong> — 存在しない設定キー <code>LINE_USER_ID</code> を参照しており常に静かにスキップされていた（「LINE: OK」はトークン確認の結果で実送信ではなかった）。<code>getAllUserStates()</code> で <code>user_state</code> の LINE ユーザーを取得し、各ユーザーへ実際に Push して結果を表示するよう変更</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.20.7 -->
   <div class="version-block">
     <div class="version-header">
@@ -69,6 +86,8 @@ code{
       <ul>
         <li><span class="badge badge-change">change</span> <strong>🎲 「確率割り算」→「サイコロ間隔（分）」にリネーム</strong> — 「N分に1回だけサイコロを振る」という直感的な意味に再定義（数学的には旧仕様と等価）。max値も 20→60 に拡張。既存設定値はそのまま動作</li>
         <li><span class="badge badge-feat">feat</span> <strong>📊 寂しさゲージシミュレータ大幅改善</strong> — オレンジ点線で「累積期待発火回数」可視化 / 「期待1回」水平線 / X軸を 0-24h 固定 + 6h刻みラベル / 「話しかけ開始」紫縦線追加 / 統計欄に「期待発火/周期」追加</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🏷 モデル未更新時のフォールバック表示</strong> — 初回セットアップ時などモデル更新未実行の場合、モデル選択プルダウンが空になっていた問題を改善。空の場合は案内メッセージと gemini-flash-latest サンプルを表示</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🧪 Gemini 生レスポンステスト追加</strong> — 設定画面の個別診断ツールに追加。Gemini APIを直接叩いて生JSONレスポンスを表示し、API側の問題を証明できる</li>
       </ul>
     </div>
   </div>
