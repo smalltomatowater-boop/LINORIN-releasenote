@@ -58,6 +58,21 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.20.11 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.20.11</span>
+      <span class="version-date">2026-06-28</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">バグ修正：AI返信の先頭欠損 + 二重プッシュ防止</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 AI返信の先頭文字が欠損する問題を修正</strong> — 「3日後また来るね」→「日後また来るね」のように数字・記号始まりの返答の先頭が消えていた問題を修正。英字が含まれる場合のみ除去するよう条件を改善</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 二重プッシュの防止強化</strong> — GASの並行トリガー実行で同一メッセージが2回送信されるケースを、スクリプトロック追加で解消</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.20.10 -->
   <div class="version-block">
     <div class="version-header">
