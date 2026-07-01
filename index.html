@@ -58,6 +58,21 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.20.12 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.20.12</span>
+      <span class="version-date">2026-07-01</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">バグ修正：連続プッシュ防止（updateUserState デッドロック修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 連続プッシュを引き起こすデッドロックを修正</strong> — <code>scheduledCheck()</code> が ScriptLock を保持した状態で <code>updateUserState()</code> が同じロックを取得しようとして10秒タイムアウト後に何も更新せずリターン。<code>lastInteraction</code> が更新されずプッシュが連続発火していた問題を修正</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 プッシュ後クールダウンを確保</strong> — デフォルト設定で <code>lastInteraction</code> が <code>now-silenceMin</code> に設定されており即再プッシュ可能な状態だった。<code>retention=0</code> のとき <code>lastInteraction=now</code> とすることで <code>silence_threshold_min</code> 分間のクールダウンを確保</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.20.11 -->
   <div class="version-block">
     <div class="version-header">
