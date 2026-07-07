@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.20.13 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.20.13</span>
+      <span class="version-date">2026-07-07</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">性能改善：WebUIポーリング最適化（タブ間排他・バックグラウンド停止）</div>
+      <ul>
+        <li><span class="badge badge-change">change</span> <strong>⚡ ポーリング間隔を可変化</strong> — 新着取得を「30秒固定」から「平時90秒 / 送信後5秒（最大60秒）」に変更。1日の実行回数を約1/3に削減しつつ、送信後の応答遅延を最悪30秒→5秒に短縮</li>
+        <li><span class="badge badge-change">change</span> <strong>🔧 複数タブのポーリング重複を解消</strong> — localStorageでリーダー選出（heartbeat方式）。複数タブを開いてもAPIを叩くのは1タブのみ、新着は <code>storage</code> イベントで全タブに配信</li>
+        <li><span class="badge badge-change">change</span> <strong>🔋 バックグラウンド時のポーリング停止</strong> — タブ非表示時は停止してリーダーを解放、復帰時に即ポーリングで未読を取得</li>
+        <li><span class="badge badge-change">change</span> <strong>🔧 バージョンチェックを時間ベース化</strong> — 「ポーリング10回に1回」を「5分ごと」に変更（間隔が可変になったため）</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.20.12 -->
   <div class="version-block">
     <div class="version-header">
