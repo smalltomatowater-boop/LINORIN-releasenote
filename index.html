@@ -58,6 +58,22 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.21.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.21.0</span>
+      <span class="version-date">2026-07-08</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">新機能：ユーザー定義関数ディスパッチャ（callUserFunction / ?page=custom）</div>
+      <ul>
+        <li><span class="badge badge-new">new</span> <strong>✨ callUserFunction ディスパッチャ追加</strong> — ユーザーが <code>custom.gs</code> に定義した関数を名前で呼べる汎用エントリ。LINORIN.js をバージョンアップで上書きしても、呼ばれる関数は custom.gs に残り<strong>カスタマイズが消えない</strong></li>
+        <li><span class="badge badge-new">new</span> <strong>✨ ?page=custom エンドポイント</strong> — URL から自作関数を叩ける（<code>?page=custom&name=FUNC&args=JSON&token=DIAG_TOKEN</code>）。ブックマーク/curl/IFTTT 等の外部連携に</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 予約関数ブラックリスト</strong> — 本体の重要関数（doGet/setup/callLLM 等）の誤呼び出しを防止</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.20.13 -->
   <div class="version-block">
     <div class="version-header">
@@ -71,6 +87,8 @@ code{
         <li><span class="badge badge-change">change</span> <strong>🔧 複数タブのポーリング重複を解消</strong> — localStorageでリーダー選出（heartbeat方式）。複数タブを開いてもAPIを叩くのは1タブのみ、新着は <code>storage</code> イベントで全タブに配信</li>
         <li><span class="badge badge-change">change</span> <strong>🔋 バックグラウンド時のポーリング停止</strong> — タブ非表示時は停止してリーダーを解放、復帰時に即ポーリングで未読を取得</li>
         <li><span class="badge badge-change">change</span> <strong>🔧 バージョンチェックを時間ベース化</strong> — 「ポーリング10回に1回」を「5分ごと」に変更（間隔が可変になったため）</li>
+        <li><span class="badge badge-change">change</span> <strong>🔧 日次リセット時刻を設定化</strong> <small>(1.20.13.1)</small> — <code>dailyReset</code> トリガー時刻が <code>atHour(17)</code> ハードコード（<code>setup()</code> 再実行で手動変更が消える問題あり）だったのを config <code>daily_reset_hour</code>（デフォ17）参照に変更。設定UIから変更可能に</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 日次リセット時刻の空文字フォールバック修正</strong> <small>(1.20.13.2)</small> — <code>daily_reset_hour</code> 未設定（空文字）時に <code>Number("")===0</code> で0時トリガーが作られる問題を修正。空文字/未設定/範囲外は17時にフォールバック</li>
       </ul>
     </div>
   </div>
