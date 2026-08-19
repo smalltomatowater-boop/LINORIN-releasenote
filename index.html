@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.22.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.22.2</span>
+      <span class="version-date">2026-08-19</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">セキュリティ強化・シミュレーター独立URL化</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 DIAG_TOKEN・生成ログのログ出力を廃止</strong> — StackDriver(Logging) へのトークン永続残留を防止。トークン確認は <code>getDiagToken()</code> の戻り値で行う形式に変更</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 doPost の webhook 生bodyログを DEBUG フラグ制御に変更</strong> — ユーザーメッセージを含むペイロードのログ出力（PII）を防止。本番ではリクエスト長のみ記録</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 トークン比較をタイミングセーフ化</strong> — <code>?page=diag</code> / <code>?page=custom</code> / <code>?page=test</code> のトークン検証を <code>_safeTokenEqual()</code>（定数時間比較）に変更し、タイミング攻撃の余地を除去</li>
+        <li><span class="badge badge-feat">feat</span> <strong>✨ 寂しさゲージシミュレーターのリンクを GitHub Pages 独立URL化</strong> — 設定UI「困った→寂しさゲージ」が GAS 本体の <code>?page=simulator</code> 依存から独立した公開URLに変更。匿名アクセス不可の環境でも開けるようになり、<code>CONFIG["simulator_url"]</code> で独自URLに上書き可能</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.22.1 -->
   <div class="version-block">
     <div class="version-header">
