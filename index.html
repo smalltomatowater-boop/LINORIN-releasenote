@@ -58,6 +58,27 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.23.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.23.0</span>
+      <span class="version-date">2026-08-20</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">セキュリティ監査対応</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 LINE Webhook 署名なしリクエストの認証を強化</strong> — 署名ヘッダーが欠落した場合でも <code>WEBHOOK_ACCESS_TOKEN</code>（Webhook URL に <code>?token=</code> で埋め込み）で認証するよう変更。<code>setup()</code> が自動生成し、<code>getWebhookTokenInfo()</code> で確認可能</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 設定画面でのAPIキー・トークンの平文表示を廃止</strong> — 保存済みの値はマスク表示に変更。未編集のまま保存しても値は保持される</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🔒 WebUI保存操作にアクセストークン認証を追加</strong> — <code>WEBUI_ACCESS_TOKEN</code> 設定時、設定保存リクエストにトークン検証を必須化</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 各種トークン比較をタイミングセーフ化</strong></li>
+        <li><span class="badge badge-fix">fix</span> <strong>🟡 スプレッドシート数式インジェクション対策</strong> — メッセージ本文が <code>=</code> 等で始まる場合に無害化して記録</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🟡 シミュレーターへの遷移リンクのオープンリダイレクトを修正</strong> — 相対URLのみ許可</li>
+        <li><span class="badge badge-feat">feat</span> <strong>✨ さくらエンジンでの画像入力に対応</strong> — 従来は画像を送ると常に Gemini にフォールバックしていたバグを修正。設定でON/OFF可（既定OFF）</li>
+        <li><span class="badge badge-change">change</span> <strong>📋 channel_merge 設定にシングルユーザー専用の注意書きを追加</strong></li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.22.2 -->
   <div class="version-block">
     <div class="version-header">
