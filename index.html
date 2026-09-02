@@ -58,6 +58,22 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.24.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.24.0</span>
+      <span class="version-date">2026-09-02</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">URL共有・LINEスタンプ認識・Slack絵文字リアクション対応</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>✨ URL共有機能</strong> — メッセージ内のURLを検知してページを取得し、タイトル・説明・本文抜粋をLLMに渡してリンクの内容に自然に反応できるように</li>
+        <li><span class="badge badge-feat">feat</span> <strong>✨ LINEスタンプ認識</strong> — スタンプの意味（keywords）を検知して短く反応。画像と違いその場で即返信</li>
+        <li><span class="badge badge-feat">feat</span> <strong>✨ Slack絵文字リアクション対応</strong> — LINEスタンプに相当。利用にはSlackアプリ側でEvent Subscriptions（reaction_added購読）+ Bot Token Scopes（reactions:read）の追加設定と再インストールが必要</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.23.2 -->
   <div class="version-block">
     <div class="version-header">
@@ -70,6 +86,20 @@ code{
         <li><span class="badge badge-fix">fix</span> <strong>🐛 LINEで複数枚まとめて画像を送ると「画像を受信しました」が枚数分連投される問題を修正</strong> — 数秒以内の連続画像はまとめて1回だけ通知するように変更</li>
         <li><span class="badge badge-fix">fix</span> <strong>🐛 画像バッファが日次日記の予定抽出処理と同じ列に書き込まれていた不具合を修正</strong> — タイミングが重なると画像バッファが消え、AIが「画像を確認できませんでした」と返す原因になり得た</li>
         <li><span class="badge badge-fix">fix</span> <strong>🔧 LINE画像コンテンツ取得に1回リトライを追加</strong> — 一過性の取得失敗に対する耐性を向上</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.23.2.1（2026-09-02・URL共有 + LINEスタンプ認識 + Slackリアクション、main検証中・未検証）</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>✨ URL共有機能</strong> — メッセージ内のURLを検知してページを取得し、タイトル・説明・本文抜粋をLLMに渡してリンクの内容に自然に反応できるように</li>
+        <li><span class="badge badge-feat">feat</span> <strong>✨ LINEスタンプ認識</strong> — スタンプの意味（keywords）を検知して短く反応</li>
+        <li><span class="badge badge-feat">feat</span> <strong>✨ Slack絵文字リアクション対応</strong> — LINEスタンプに相当。Slackアプリ側でreaction_added購読の設定が必要</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.23.2.2（2026-09-02・スタンプ反応の長文化を修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 スタンプ・絵文字リアクションの応答が長文になる問題を修正</strong> — reply_length_level設定が優先されていたのを、スタンプ/リアクション由来のメッセージは強制的に最短反応（一言）にするよう修正</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.23.2.3（2026-09-02・SlackでURL共有が機能しない不具合を修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 SlackでURL共有が機能しない不具合を修正</strong> — Slackが`&lt;url|表示名&gt;`形式でURLを配信するため表示名込みで抽出してしまいフェッチに失敗していた。パイプ以降を除外するよう修正</li>
       </ul>
     </div>
   </div>
