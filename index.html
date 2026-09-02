@@ -58,6 +58,22 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.23.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.23.2</span>
+      <span class="version-date">2026-09-02</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">LINE複数枚画像送信の不具合修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 LINEで複数枚まとめて画像を送ると「画像を受信しました」が枚数分連投される問題を修正</strong> — 数秒以内の連続画像はまとめて1回だけ通知するように変更</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 画像バッファが日次日記の予定抽出処理と同じ列に書き込まれていた不具合を修正</strong> — タイミングが重なると画像バッファが消え、AIが「画像を確認できませんでした」と返す原因になり得た</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔧 LINE画像コンテンツ取得に1回リトライを追加</strong> — 一過性の取得失敗に対する耐性を向上</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.23.1 -->
   <div class="version-block">
     <div class="version-header">
