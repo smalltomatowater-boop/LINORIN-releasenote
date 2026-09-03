@@ -58,6 +58,31 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.24.1 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.24.1</span>
+      <span class="version-date">2026-09-03</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">セキュリティレビュー対応・実装バグ8件修正・リアクション/スタンプ合流の安定化</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🚨 WebUI RPC認証を統一</strong> — 未認証だった約30個の公開関数にトークン検証を追加（opt-in継続、既存ユーザーへの影響なし）</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🚨 callUserFunction を許可リスト方式に変更</strong> — custom_ プレフィックス限定 + DIAG_TOKEN必須化。【破壊的変更】custom_で始まらない既存のcustom.gs関数は呼べなくなる</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 キュー処理のスタック判定レース条件を修正</strong> — 長時間キュー滞留後に処理開始したメッセージが誤ってfailed化される問題を修正</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 LINE Webhook生ボディの8000文字切り詰めを修正</strong> — 大きいペイロードでのJSON破損・ポイズンピル化を解消</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 WebUI生成画像のBase64直接保存を修正</strong> — Driveアップロード＋短い参照形式に変更</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🚨 sanitize()の過剰削除を修正</strong> — 本文中に複数のアスタリスク囲みがあると返信の大部分が消える重大バグを含む</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 メール設定の二重管理を修正</strong> — サーバー側スキーマを唯一の定義元に統一</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 数式インジェクション対策の対象文字に「-」を追加 / RAGキャッシュキー不一致を修正 / local_llmトークン比較をタイミングセーフ化</strong></li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 Slackリアクション/LINEスタンプ直後にチャットすると返信が2件に分かれる不具合を修正</strong> — 一旦バッファし本人の後続メッセージに合流。合流タイミングのレース条件も修正</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 自撮り画像生成が完全無反応になる不具合を修正</strong> — 日記用のSUB_LLM_ENGINE設定を誤って共用していたのを、画像生成専用のIMAGE_LLM_ENGINEを明示指定するよう修正</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 自撮り画像に背景が出ない不具合を修正</strong></li>
+        <li><span class="badge badge-change">change</span> <strong>📋 利用規約を更新</strong> — 改変・リファクタリング・商用利用は可、ソースコードとしての再配布・再販売は禁止、第三者向けサービス利用時の責任範囲を明記</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.24.0 -->
   <div class="version-block">
     <div class="version-header">
@@ -70,6 +95,38 @@ code{
         <li><span class="badge badge-feat">feat</span> <strong>✨ URL共有機能</strong> — メッセージ内のURLを検知してページを取得し、タイトル・説明・本文抜粋をLLMに渡してリンクの内容に自然に反応できるように</li>
         <li><span class="badge badge-feat">feat</span> <strong>✨ LINEスタンプ認識</strong> — スタンプの意味（keywords）を検知して短く反応。画像と違いその場で即返信</li>
         <li><span class="badge badge-feat">feat</span> <strong>✨ Slack絵文字リアクション対応</strong> — LINEスタンプに相当。利用にはSlackアプリ側でEvent Subscriptions（reaction_added購読）+ Bot Token Scopes（reactions:read）の追加設定と再インストールが必要</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.24.0.1（2026-09-02・Slackリアクション直後のチャットが二重返信になる不具合を修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 リアクション直後にチャットすると返信が2件スタックする問題を修正</strong> — リアクションを一旦バッファし、直後のチャットに合流させて1件の返信にまとめる。何も来なければ従来通り単体反応</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.24.0.2（2026-09-02・合流のレース修正 + LINEスタンプにも対応）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 まれに合流に失敗して2件に分かれる不具合を修正</strong> — 単体発火に最低50秒の待機時間を追加</li>
+        <li><span class="badge badge-feat">feat</span> <strong>✨ LINEスタンプにも同じ合流の仕組みを適用</strong></li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.24.0.3（2026-09-02・外部セキュリティレビュー対応 P0 2件 + 実装バグ2件 + 利用規約更新）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🚨 WebUI RPC認証を統一</strong> — 約41個の公開関数のうち未認証だった30個にトークン検証を追加（opt-in継続、既存の未設定ユーザーへの影響なし）</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🚨 callUserFunction を許可リスト方式に変更</strong> — custom_ プレフィックス限定 + DIAG_TOKEN必須化。【破壊的変更】custom_で始まらない既存のcustom.gs関数は呼べなくなる</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔧 local_llmのトークン比較をタイミングセーフ化</strong></li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 数式インジェクション対策の対象文字に「-」を追加</strong></li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 RAGエントリのキャッシュキー不一致を修正</strong> — 追加時は大文字小文字違いで実質無効化されておらず、削除時は無効化処理自体が無かった</li>
+        <li><span class="badge badge-change">change</span> <strong>📋 利用規約を更新</strong> — 改変・リファクタリング・商用利用は可、ソースコードとしての再配布・再販売は禁止、第三者向けサービス利用時の責任範囲を明記</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.24.0.4（2026-09-03・実装バグ指摘の残り4件に対応）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 キュー処理のスタック判定レース条件を修正</strong> — processingStartedAt列を新設し、長時間キュー滞留後に処理開始したメッセージが誤ってfailed化される問題を修正</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 LINE Webhook生ボディの8000文字切り詰めを修正</strong> — イベント単位で個別保存する方式に変更し、大きいペイロードでのJSON破損・ポイズンピル化を解消</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 WebUI生成画像のBase64直接保存を修正</strong> — Driveアップロード＋短い参照形式に変更し、セル文字数上限超過による書き込み失敗リスクを解消</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🚨 sanitize()の過剰削除を修正</strong> — 箇条書き除去の範囲限定に加え、調査中に発見した重大バグ（本文中に複数のアスタリスク囲みがあると返信の大部分が消える）も修正</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 メール設定の二重管理を修正</strong> — ハードコードされた設定カードを削除し、サーバー側スキーマを唯一の定義元に統一</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.24.0.5〜.8（2026-09-03・Slack自撮りトリガーの実機デバッグで発見した実バグ2件 + 背景なし画像を修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 画像プロンプト生成失敗時に無反応になる不具合を修正</strong> — callSubLLMが例外を投げずに空応答を返した場合、これまで完全にスルーされていた。失敗メッセージを返すよう修正</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🚨 自撮り画像生成が日記用のSUB_LLM_ENGINE設定を誤って共用していた問題を修正</strong> — 画像プロンプト作文にIMAGE_LLM_ENGINEを明示指定するよう変更し、日記用に選ばれたモデル（コード特化等）が画像生成に間借りされる設計ミスを解消</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 自撮り画像に背景が出ない不具合を修正</strong> — 日記画像テンプレートには背景の指示があったが自撮り側には無かったため、背景・構図の指示を追加</li>
       </ul>
     </div>
   </div>
