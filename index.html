@@ -58,6 +58,34 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.0 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.0</span>
+      <span class="version-date">2026-09-04</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">システムプロンプト プレビュー・長期記憶の確認・修正</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>📝 システムプロンプト プレビュー</strong> — 設定画面「キャラ」タブ「記憶と知識」から、現在の設定（人格・記憶・時間帯指示など）で組み立てられるシステムプロンプトの全文をその場で確認できるように。会話履歴やその時点のRAGマッチは含まない「今の設定ならこうなる」プレビューであることを画面上に明記</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🧠 長期記憶の確認・修正</strong> — 設定画面「キャラ」タブに「長期記憶」セクションを追加。「あなたについての記憶」「AI自身の記憶」を確認・直接編集・保存可能に。保存競合検知（revision比較）、重複userId時の保存拒否、フォーマット・参照文字数上限超過の非ブロッキング警告に対応</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.0.1（2026-09-04・AI自身の記憶の参照上限拡大 + push-testの画像生成コスト対応）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔧 AI自身の記憶の応答時参照上限を2048→16384文字に拡大</strong> — 日記の蓄積で記憶が約9000文字まで肥大化しており、大部分が切り詰められていた</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔧 push-testの画像生成テストをデフォルトOFF化</strong> — 課金対象の画像生成APIを疎通確認のたびに無条件実行していたのを修正。明示指定時のみ実行するように変更</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.0.2（2026-09-04・応答コンテキストを撤回しシステムプロンプトプレビューへ再設計）</div>
+      <ul>
+        <li><span class="badge badge-change">change</span> <strong>🔧 チャット画面の「応答コンテキスト」機能を撤回し、設定画面の「システムプロンプト プレビュー」に置き換え</strong> — 直前の実応答データは別ページの設定画面から原理上読めないため、置き場所の指摘を受けて設計そのものを変更</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.0.3（2026-09-04・システムプロンプトプレビューのアイコン変更）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🎨 「システムプロンプト プレビュー」のアイコンを🧠→📝に変更</strong> — 同じ「記憶と知識」カテゴリ内の「長期記憶」セクションと🧠が重複していたため</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.24.1 -->
   <div class="version-block">
     <div class="version-header">
