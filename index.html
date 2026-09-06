@@ -58,6 +58,53 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.2</span>
+      <span class="version-date">2026-09-06</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔒 Webhookトークンの自動発行をオプトイン化 + 経過時間バグ修正 + 連投合流の安定化</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 WEBHOOK_ACCESS_TOKENの無条件生成をオプトイン化</strong> — バージョンアップ後にLINEの返信が来なくなったという報告あり。原因は<code>setup()</code>がWebhookアクセストークンを無条件で新規発行し、対応するWebhook URLの更新を忘れると全メッセージが無条件拒否されること。設定画面「システム」タブの「Webhookにアクセストークンを必須化」をONにした場合のみ発行されるように変更（既定OFF）。<strong>すでに返信が来なくなっている場合</strong>は、このトグルをONにして「セットアップ実行」→表示されるURLでLINE Developers ConsoleのWebhook URLを更新してください</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 自発プッシュ時刻をユーザー発言時刻と誤認するバグを修正</strong> — 詳細下記</li>
+        <li><span class="badge badge-fix">fix</span> <strong>✅ 連投テキストの合流機能</strong> — LINEで短文を立て続けに送っても1件にまとめて返信するように（一時停止していたが原因無実と判明し復帰）</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.2.8（2026-09-06・自発プッシュ時刻をユーザー発言時刻と誤認するバグを修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 経過時間表示の誤りを修正</strong> — システムプロンプトの「【経過時間】〜分経過しています」が、自発プッシュ（寂しさゲージ等）のたびに更新される<code>user_state</code>の<code>lastInteraction</code>列（プッシュのクールダウン用）を参照していたため、プッシュ自身の送信時刻をユーザーの発言時刻と誤認していた。<code>conversation_logs</code>の実際のユーザー発言のみを見るよう修正</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.2.7（2026-09-06・連投合流機能を再有効化 + 経過時間表示の切り分け診断追加）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>✅ 連投合流機能を再有効化</strong> — v1.25.2.6でWebhookトークン問題が真因と確定し無実だったため復帰</li>
+        <li><span class="badge badge-change">change</span> <strong>🔍 経過時間表示の切り分け用に一時診断を追加</strong> — <code>?page=diag&target=time-check</code>でスクリプト/スプレッドシートのタイムゾーン設定の食い違いを確認できるように</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.2.6（2026-09-04・WEBHOOK_ACCESS_TOKENの無条件生成をオプトイン化）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 Webhookアクセストークンの自動発行をオプトイン化</strong> — robot環境の「返信が一切来ない」障害の真因を特定：<code>setup()</code>が<code>WEBHOOK_ACCESS_TOKEN</code>を無条件で新規発行し、対応するWebhook URLの更新を忘れると全メッセージが無条件でunauthorized拒否され、しかも<code>debug_logs</code>には一切記録されなかった。<code>WEBUI_ACCESS_TOKEN</code>と同じ既定OFFのオプトイントグル（<code>webhook_access_token_enable</code>）にし、新規発行時はWebUIにURLをポップアップ表示するように変更</li>
+        <li><span class="badge badge-fix">fix</span> <strong>📝 訂正</strong> — v1.25.2.4で無効化した連投合流機能は無実だった。真因は上記のWebhook URL/トークン不一致</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.2.4（2026-09-04・🚨緊急停止：連投合流機能を無効化）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🚨 連投合流機能を緊急停止</strong> — LINEメッセージが既読にはなるのに応答が一切来なくなる実害が発生したため、v1.25.2.1で追加した連投合流ロジックを機能フラグで無効化。原因は未特定（後にv1.25.2.6で無実と判明）</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.2.3（2026-09-04・一時ファイルをゴミ箱ではなく完全削除）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔧 一時ファイルを完全削除に変更</strong> — 旧壁紙・OCR用一時ファイル等をゴミ箱に入れるだけだったのを、Advanced Drive Serviceで即時削除するように変更。ゴミ箱は30日間ストレージ容量を消費し続けるため、画像・PDF添付を多用するユーザーほど容量を圧迫していた</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.2.1（2026-09-04・連投メッセージの合流）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 連投テキストの合流</strong> — LINEで短文を立て続けに送ると1通ずつ数分かけて時差返信になっていた不具合を修正。直近30秒以内・同一ユーザーの未処理メッセージがあれば1件にまとめて返信するように</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.2.2（2026-09-04・明日の予定抽出を会話ログにも対応 + 関数名の是正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 明日の予定（tomorrow_events）の抽出に今日の会話ログを追加</strong> — 従来は設定画面の固定プロフィールからしか抽出しておらず、「明日、面接なんだ」等の当日の会話を拾えていなかった</li>
+        <li><span class="badge badge-change">change</span> <strong>🔧 関数名の是正</strong> — 「全ユーザー」向けに見えた`generateDailyDiaryForAllUsers`等を、実装通り「メインユーザー1名」を処理する`generateDailyDiaryForPrimaryUser`に改名。許可ユーザーID欄の説明も明確化</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.1 -->
   <div class="version-block">
     <div class="version-header">
