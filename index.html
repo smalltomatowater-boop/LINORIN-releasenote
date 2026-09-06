@@ -58,6 +58,29 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.4 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.4</span>
+      <span class="version-date">2026-09-06</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 設定トグル表示バグ修正 + 日記生成の自動フォールバック</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 設定トグルが常にOFF表示になる不具合を修正</strong> — 秘匿情報マスク処理がキー名のパターンだけで判定していたため、<code>webhook_access_token_enable</code>/<code>webui_access_token_enable</code>等の真偽値トグルまでマスクされ、実際の値が保存されていても常にOFFに見えていた</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 日記生成の空応答をGeminiへ自動フォールバック</strong> — コード特化モデルが長い創作文の日記プロンプトに稀に空応答を返し生成が丸ごと失敗する問題を緩和</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.3.2（2026-09-06・日記生成の空応答をGeminiへ自動フォールバック）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 日記生成が空応答で失敗する不具合を緩和</strong> — <code>SUB_SAKURA_MODEL</code>（コード特化モデル）が長い創作文の日記プロンプトに稀に空応答を返し生成が丸ごと失敗していた。空応答/エラー時にGeminiへ1回だけ自動フォールバック再試行するように</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.3.1（2026-09-06・トークン系トグルがマスクされ常にOFF表示になる不具合を修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 設定トグルが常にOFF表示になる不具合を修正</strong> — 秘匿情報マスク処理がキー名に<code>TOKEN</code>を含むかどうかだけで判定していたため、<code>webhook_access_token_enable</code>/<code>webui_access_token_enable</code>のような真偽値トグルまで<code>(set:Nchars)</code>にマスクされ、チェックボックスが常にOFF表示になっていた（実際の値はv1.25.3で正しく保存されていたが表示だけ壊れていた）。<code>type:'toggle'</code>のキーはマスク対象から除外</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.3 -->
   <div class="version-block">
     <div class="version-header">
