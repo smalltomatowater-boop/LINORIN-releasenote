@@ -58,6 +58,34 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.3 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.3</span>
+      <span class="version-date">2026-09-06</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 設定トグル保存不具合の修正 + 🔑 Webhook認証状態をWebUIから確認可能に</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 設定トグルが保存されない不具合を修正</strong> — <code>webui_access_token_enable</code>/<code>webhook_access_token_enable</code>のような後から追加した設定項目が、既存ユーザーのconfigシートでは保存できず「勝手にOFFへ戻る」ように見えていた</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🔑 「困った」タブにWebhook認証状態確認を追加</strong> — GASエディタを開かなくても、WebUIから直接<code>webhookAccessToken</code>と推奨Webhook URLを確認できるように</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🔗 診断結果のURLをワンクリックでコピー可能に</strong> — LINE Developers ConsoleのWebhook URL欄にそのまま貼り付けられるURL単体コピーボタンを追加</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.2.3（2026-09-06・診断結果のURLをワンクリックでコピーできるように）</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>🔗 診断結果のURLをワンクリックでコピー可能に</strong>（詳細は上記参照）</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.2.2（2026-09-06・「困った」タブにWebhook認証状態確認を追加）</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>✨ 「困った」タブに🔑Webhook認証状態ボタンを追加</strong> — GASエディタを開かなくても、WebUIから直接<code>webhookAccessToken</code>の値と推奨Webhook URLを確認できるように</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.2.1（2026-09-06・トークン系トグルが保存されない不具合を修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 設定トグルが保存されない不具合を修正</strong> — 既存ユーザーのconfigシートに行が無い設定キー（<code>webui_access_token_enable</code>/<code>webhook_access_token_enable</code>等）は、トグルをONにして保存しても書き込み先の行が無く何も保存されず、次回読み込み時に「勝手にOFFへ戻る」ように見えていた。スキーマ定義済みだがシートに行が無いキーを自動で追記するよう修正</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.2 -->
   <div class="version-block">
     <div class="version-header">
