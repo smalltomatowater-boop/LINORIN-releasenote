@@ -58,6 +58,48 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.5 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.5</span>
+      <span class="version-date">2026-09-08</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔒 セキュリティ強化 + 💰 LINE課金削減 + 運用限界の解消</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔧 event_queueの自動アーカイブ + 毎分トリガーの早期return最適化</strong> — 増え続けるevent_queueがGASクォータを圧迫するリスクを解消</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 Slack/TelegramにもWebhook認証を追加</strong> — LINEのみだった認証をSlack/Telegramにも適用</li>
+        <li><span class="badge badge-feat">feat</span> <strong>💰 LINE返信でReply API（無料）を優先使用</strong> — 従来のPush API（課金対象）一辺倒から、可能な限り無料のReply APIを使うように変更。実機確認済み</li>
+        <li><span class="badge badge-feat">feat</span> <strong>📝 Reply/Push使用状況をdebug_logsに記録</strong></li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.4.6（2026-09-08・Reply/Push使用状況をdebug_logsに記録）</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>📝 LINE送信のReply/Push使用状況をdebug_logsに記録</strong> — 実際にどちらのAPIが使われたかシートで直接確認できるように</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.4.5（2026-09-08・LINE返信でReply APIを優先し課金を削減）</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>💰 LINE返信でReply API（無料）を優先使用</strong> — 従来は常にPush API（課金対象）を使っていたが、replyTokenが有効な間はまずReply APIを試し、失敗時のみPushへ自動フォールバック</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.4.4（2026-09-08・Slack/TelegramにもWEBHOOK_ACCESS_TOKEN検証を追加）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 Slack/TelegramのWebhook認証を強化</strong> — 従来LINEのみ検証していたWEBHOOK_ACCESS_TOKENをSlack/Telegramにも適用。未設定時は既存の後方互換動作を維持</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.4.3（2026-09-07・event_queueの無限増殖と毎分フルスキャンを解消）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔧 event_queueの自動アーカイブを追加</strong> — 一度も削除・アーカイブされず無限に増え続けていたevent_queueを、<code>max_event_queue_rows</code>（既定3000）超過時にdone/failed行のみDrive上へアーカイブ。queued/processing行には触れない安全設計</li>
+        <li><span class="badge badge-fix">fix</span> <strong>⚡ 毎分トリガーの早期return最適化</strong> — 活性行（queued/processing）が無ければ全列読み取りを丸ごとスキップし、トリガー実行時間の増大を抑制</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.4.2（2026-09-07・外部レビューで見つかった小さな品質不具合5点を修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> コメント矛盾・キャラ名ハードコード・中国語混入・STYLE_EXAMPLESの過剰切り詰めなど5点を修正</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.4.1（2026-09-07・ロック非リエントラント前提を実測で検証）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> GASのScriptLockが同一実行内で再入可能かを実測診断で確認。コード内コメントの誤った前提を修正（動作自体は元々問題なし）</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.4 -->
   <div class="version-block">
     <div class="version-header">
