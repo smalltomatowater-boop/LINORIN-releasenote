@@ -58,6 +58,26 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.8 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.8</span>
+      <span class="version-date">2026-09-08</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🚨 新規インストールのWebhookトークン既定ON化が機能していなかったバグを修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 新規インストール判定が実質デッドコードだったバグを修正</strong> — v1.25.6の機能が実装上の実行順序の問題で一度も発動していなかった。判定基準もバージョン非依存の方式に変更</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 Reply失敗時の判定をさらに精緻化</strong> — 5xxは確定失敗としてPushへ、ネットワーク例外のみ同一トークンで再試行して判別</li>
+      </ul>
+      <div class="section-title">内部デプロイ v1.25.7.1（2026-09-08・外部レビュー3点対応）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 Reply失敗時の判定をさらに精緻化</strong> — 5xxは確定失敗としてPushへ、ネットワーク例外は同一トークンで再試行して判別するように変更</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 新規インストール判定が実質デッドコードだったバグを修正</strong> — webhook_access_token_enableの既定ON化が一度も発動していなかった不具合を修正。判定基準もバージョン非依存の方式に変更</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.7 -->
   <div class="version-block">
     <div class="version-header">
