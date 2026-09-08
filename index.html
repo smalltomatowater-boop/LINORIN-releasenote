@@ -58,6 +58,46 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.6 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.6</span>
+      <span class="version-date">2026-09-08</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 モデル選択の初期不具合修正 + 💰 Reply API活用の精緻化 + 🔒 セキュリティ改善</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 モデル一覧未取得時の案内が「[有料]」に化ける不具合を修正</strong> — 新規セットアップ直後にこれを選んで保存すると返信できなくなっていた</li>
+        <li><span class="badge badge-feat">feat</span> <strong>💰 Reply API活用の精緻化</strong> — 二重送信リスク回避、画像返信の1回化、経過時間判定の基準修正</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🔒 新規インストールはWebhookトークンを既定ONに</strong> — 既存ユーザーは既定OFFのまま</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 設定UIのXSS修正1件</strong></li>
+      </ul>
+      <div class="section-title">内部デプロイ v1.25.5.5（2026-09-08・モデル未取得時のプレースホルダーが「[有料]」に化ける不具合を修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 モデル一覧未取得時の案内表示を修正</strong> — APIキー入力直後「全エンジン・モデルを更新」を押す前は、モデル選択欄の案内文が「[有料] 」（空欄）という意味不明なラベルに上書きされていた。これを選んで保存するとモデル未設定のまま返信できなくなる実害があった。プレースホルダーは選択不可にして防止</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.5.4（2026-09-08・設定UIのXSS修正1件）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 テラリウムログ表示のXSS修正</strong> — RPCエラーメッセージをescapeHtmlせずinnerHTMLへ挿入していた箇所を修正</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.5.3（2026-09-08・新規インストールのWebhookトークン既定ON + 経過時間の基準修正）</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>🔒 新規インストールはwebhook_access_token_enableを既定ONに</strong> — 既存ユーザーは既定OFFのまま。DIAG_TOKENの有無で新規/既存を判定</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 replyToken経過時間の基準を修正</strong> — createdAt（キュー移送時刻）ではなく、実際のWebhook受信時刻に近いtimestamp列を基準にするよう修正</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.5.2（2026-09-08・Reply API活用のさらなる改善3点）</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>💰 画像返信もReply APIを活用</strong> — テキスト+画像を1回のReply（無料）にまとめる<code>sendLineTextAndImage()</code>を新設。従来のPush×2から削減</li>
+        <li><span class="badge badge-fix">fix</span> <strong>⚡ 期限切れ確定のreplyTokenは最初から試さない</strong> — 90秒以上経過した行は無駄なReply試行を省略</li>
+        <li><span class="badge badge-fix">fix</span> <strong>📝 Slack/Telegramの拒否ログを集約化</strong> — LINEと同じレート制限ロジックを適用</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.5.1（2026-09-08・Reply失敗時の二重送信リスクを回避）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 Reply失敗時のフォールバック判定を精緻化</strong> — 4xx（明確な拒否）はPushへフォールバック。5xx・ネットワーク例外（送信結果が不確定）は二重送信を避けるため自動フォールバックしない</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.5 -->
   <div class="version-block">
     <div class="version-header">
