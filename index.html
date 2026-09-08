@@ -58,6 +58,29 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.7 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.7</span>
+      <span class="version-date">2026-09-08</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 UX改善2点（画像受信メッセージ・Webhook URLポップアップの誤再表示）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>💬 画像受信時の既定メッセージを見直し</strong> — 「写真を受け取ったよ、何の話をしたい？」に変更</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 Webhook URL変更ポップアップが毎回再表示される不具合を修正</strong> — サーバー側判定に変更し、一度きりの表示に</li>
+      </ul>
+      <div class="section-title">内部デプロイ v1.25.6.2（2026-09-08・Webhook URL変更ポップアップが毎回再表示される不具合を修正）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 セットアップ実行のたびにWebhook URL変更ポップアップが再表示される不具合を修正</strong> — 判定に使っていたlocalStorageがsrcdoc iframe（origin="null"）で永続化されないブラウザがあった。サーバー側ScriptPropertiesでの判定に変更</li>
+      </ul>
+      <div class="section-title" style="margin-top:16px">内部デプロイ v1.25.6.1（2026-09-08・画像受信時の既定メッセージを見直し）</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>💬 画像受信時の既定自動返信を見直し</strong> — 事務的な通知文「画像を受信しました。なにについて話したいですか？」を「写真を受け取ったよ、何の話をしたい？」に変更。設定できても既定値が事務的だと大半のユーザーは気づかず体験してしまう、という外部ユーザーの投稿がきっかけ</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.6 -->
   <div class="version-block">
     <div class="version-header">
