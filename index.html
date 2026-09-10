@@ -58,6 +58,21 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.9 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.9</span>
+      <span class="version-date">2026-09-10</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 日記が途中で切れる不具合を修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 日記生成の最大トークン数の既定値を引き上げ（2000→4000）</strong> — 「長めに、感情豊かに」「最低でも800文字以上」の指示に対し、2000トークンでは日本語で最大1,300〜1,800文字程度しか出力できず、特に思考モデル使用時は文末で力尽きて途中切れすることがあった</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛【重大】日記本文中の"---"が文章の後半ごと誤って削除される不具合を修正</strong> — AI自身の末尾署名（"---\nWritten by..."）除去処理が、単独の"---"だけでも切り捨てる作りだったため、本文中で場面転換に"---"を使うと以降が丸ごと消滅していた。"Written by"と隣接する場合のみ除去するよう厳密化</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.8 -->
   <div class="version-block">
     <div class="version-header">
