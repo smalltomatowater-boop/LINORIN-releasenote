@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.10 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.10</span>
+      <span class="version-date">2026-09-11</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🚨【重大】「日記・記憶用のAI」が「メインと同じ」設定でも、モデル更新のたびに勝手に別モデルへすり替わる不具合を修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 モデル解決ロジックの構造的な罠を修正</strong> — 「メインと同じ」設定でも非表示の`SUB_*_MODEL`が優先されてしまう構造だった。「モデル更新」ボタンが、空欄そのものに意味がある`SUB_*_MODEL`/`GEMINI_FALLBACK_MODEL`にまで先頭モデルを勝手に書き込んでいたのが原因。全プロバイダ対象</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🛡️ 記憶マージの健全性チェック</strong> — LLM出力が空・見出し欠落・大幅縮小の場合は保存せず旧記憶を維持</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🌡️ 要約系の生成温度を分離</strong> — 記憶マージ・要約・AI自己記憶生成はtemperature=0.2固定、日記のみ創作性を維持</li>
+        <li><span class="badge badge-feat">feat</span> <strong>📦 可搬アーカイブ機能を追加</strong> — 日記・記憶・人格設定・会話ログをZIPで書き出し/復元。週次自動書き出しトリガーも追加</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.9 -->
   <div class="version-block">
     <div class="version-header">
@@ -69,6 +86,12 @@ code{
       <ul>
         <li><span class="badge badge-fix">fix</span> <strong>🐛 日記生成の最大トークン数の既定値を引き上げ（2000→4000）</strong> — 「長めに、感情豊かに」「最低でも800文字以上」の指示に対し、2000トークンでは日本語で最大1,300〜1,800文字程度しか出力できず、特に思考モデル使用時は文末で力尽きて途中切れすることがあった</li>
         <li><span class="badge badge-fix">fix</span> <strong>🐛【重大】日記本文中の"---"が文章の後半ごと誤って削除される不具合を修正</strong> — AI自身の末尾署名（"---\nWritten by..."）除去処理が、単独の"---"だけでも切り捨てる作りだったため、本文中で場面転換に"---"を使うと以降が丸ごと消滅していた。"Written by"と隣接する場合のみ除去するよう厳密化</li>
+      </ul>
+      <div class="section-title">内部デプロイ v1.25.9.1（2026-09-11・記憶マージの健全性チェック＋要約温度分離＋可搬アーカイブ機能）</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>🛡️ 記憶マージの健全性チェック</strong> — LLM出力が空・見出し欠落・大幅縮小の場合は保存せず旧記憶を維持</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🌡️ 要約系の生成温度を分離</strong> — 記憶マージ・要約・AI自己記憶生成はtemperature=0.2固定、日記のみ創作性を維持</li>
+        <li><span class="badge badge-feat">feat</span> <strong>📦 可搬アーカイブ機能を追加</strong> — 日記・記憶・人格設定・会話ログをZIPで書き出し/復元。週次自動書き出しトリガーも追加</li>
       </ul>
     </div>
   </div>
