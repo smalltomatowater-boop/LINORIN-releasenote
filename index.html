@@ -58,6 +58,22 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.15 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.15</span>
+      <span class="version-date">2026-09-13</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🐛 日記が切れているのに誰も気づけない不具合を修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛【重要】全エンジンがトークン上限による打ち切りを検知できていなかった</strong> — 8エンジン全てがAPIの打ち切り理由（finishReason）を取得しながら捨てており、日記が途中で切れているかどうか判定できない構造だった。検知して<code>debug_logs</code>に記録するよう修正（対処はユーザーの設定引き上げに委ねる方針。上限を上げても課金は増えません）</li>
+        <li><span class="badge badge-feat">feat</span> <strong>📈 日記生成最大トークンの既定値を引き上げ（4000→8000）</strong></li>
+        <li><span class="badge badge-feat">feat</span> <strong>🔍 記憶・履歴の可視化診断を追加</strong>（調査用）</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.14 -->
   <div class="version-block">
     <div class="version-header">
