@@ -58,6 +58,21 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.12 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.12</span>
+      <span class="version-date">2026-09-13</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔒 新規インストールはWebUIアクセストークンを既定ONに</div>
+      <ul>
+        <li><span class="badge badge-feat">feat</span> <strong>🔒 新規インストール限定で<code>webui_access_token_enable</code>を既定ON</strong> — トークン未設定だとv1.25.11で塞いだゲート自体が作動せず、<code>/exec</code>を知っている全員にWebUIが開いてしまうため。<strong>既存ユーザーは既定OFFのままで挙動は変わりません</strong></li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔗 <code>app_url</code>がトークン付きURLで保存されるよう修正</strong> — 初回セットアップではトークン生成より先にapp_urlが同期されるため、トークン無しURLが保存されていた。設定画面のapp_urlが常に「そのまま開けるURL」になる</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.11 -->
   <div class="version-block">
     <div class="version-header">
