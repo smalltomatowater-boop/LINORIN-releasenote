@@ -58,6 +58,20 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.13 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.13</span>
+      <span class="version-date">2026-09-13</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔁 セットアップを再実行しなくても、新機能のトリガーが自動で作られるように</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔁 <code>dailyReset</code>に補助トリガーの自己修復を追加</strong> — アップデートしても<code>setup()</code>を実行しないと、後から追加された機能のトリガー（週次アーカイブ等）が永久に作られないままだった。1日1回、不足していれば自動で作成する（既存トリガーは削除せず・重複も作らない）</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.12 -->
   <div class="version-block">
     <div class="version-header">
