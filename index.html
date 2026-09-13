@@ -67,6 +67,7 @@ code{
     <div class="version-body">
       <div class="section-title">🔧 外部レビュー指摘の修正5件</div>
       <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔊【重要】Geminiの音声読み上げで「声」を選ぶと必ず失敗していた不具合を修正</strong> — <code>speechConfig</code>を<code>generationConfig</code>の外に置いていたためAPIに拒否されていた。声を未設定のときだけ偶然動いていた状態</li>
         <li><span class="badge badge-fix">fix</span> <strong>🔊 音声読み上げが再生できない可能性があったのを修正</strong> — Gemini TTSが返す生PCM（<code>audio/L16</code>）を常にmp3と偽って返していたため再生できないケースがあった。実際の形式を見てWAVに包むよう修正</li>
         <li><span class="badge badge-fix">fix</span> <strong>🔊 読み上げトグルON時に過去の発言を自動再生しないように</strong> — 「次の返信から」が自然な期待のため。過去分は各吹き出しの🔊ボタンから再生できます</li>
         <li><span class="badge badge-feat">feat</span> <strong>📝 記憶をUIから手編集した履歴を記録</strong> — 「AIが書き換えたのか自分が編集したのか」を後から追えるように（本文は残さず文字数の変化と冒頭のみ）</li>
