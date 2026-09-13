@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.25.11 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.25.11</span>
+      <span class="version-date">2026-09-13</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔒【重大】アクセストークンのゲートを迂回してAPIキーが読み出せる経路を塞いだ</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒【重大】拒否ページが HtmlService だったためトークン機構が無効化されていた</strong> — HtmlServiceで返したページには<code>google.script.run</code>のブリッジが載るため、「Access Denied」画面からでも<code>loadAllConfig()</code>等を呼んで設定内の全APIキーが読み出せた。拒否を<code>ContentService</code>に変更して経路を閉鎖。<strong>該当する方はAPIキーの再発行を検討してください</strong></li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 危険な関数をRPC面から撤去</strong> — 設定全体を返す関数、AI名義で任意送信できる関数、本人課金で会話できる関数など9個を末尾<code>_</code>付きに変更し外部から呼べないようにした（公開関数 224 → 215）</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 トークン確認用関数をゲート</strong> — トークンそのものを返す3関数に、匿名呼び出しを弾くゲートを追加</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🐛 チャット画面でクエリ付きURLが途中で切れる不具合を修正</strong> — <code>?a=1&amp;b=2</code>形式のURLが<code>&amp;</code>の位置で切れていた</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.25.10 -->
   <div class="version-block">
     <div class="version-header">
