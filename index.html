@@ -58,6 +58,24 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.26.1 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.26.1</span>
+      <span class="version-date">2026-09-30</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🧠【重要】長期記憶の統合が静かに止まる不具合を修正</div>
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.7">長期記憶が育つと、ある日から統合が止まったまま気づけなくなる不具合がありました。会話は普段どおり続きエラーも出ないため、記憶が古いまま固定されていることに気づく手段がほぼありませんでした。<strong>アップデートするだけで自動的に復旧します（設定の変更は不要です）。</strong></p>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🧠【重要】記憶の統合が途中で打ち切られて破棄されていた問題を修正</strong> — 「日記生成最大トークン」が空欄のとき、日記本体は 8000 トークンで動く一方、記憶の統合だけが 2048 トークンで動く非対称がありました。記憶が育つと出力が途中で切れ、フォーマット検証で破棄され、古い記憶が残り続けます。記憶の統合も日記と同じ既定値を使うようにしました</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🧠 「日記生成最大トークン」に既定値 8000 を設定</strong> — 新規セットアップ時に空欄にならないようにしました。既存の環境は上記の修正だけで復旧します</li>
+        <li><span class="badge badge-feat">feat</span> <strong>📅 日記の末尾に「記憶の最終更新」を表示</strong> — 長期記憶がどこまで新しいかを1行表示し、3日以上止まっていれば警告を出します</li>
+      </ul>
+      <p style="margin:10px 0 0;font-size:13px;line-height:1.7;opacity:.85">すでに記憶が止まっていた場合：アップデート後、設定画面の「困った」→「🧠 記憶を整理」を一度実行すると、その場で復旧します。</p>
+    </div>
+  </div>
+
   <!-- v1.26.0 -->
   <div class="version-block">
     <div class="version-header">
