@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.26.2 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.26.2</span>
+      <span class="version-date">2026-10-02</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🔢 数値設定が空欄表示になる不具合 + 🗑 削除後に発言が残る不具合を修正</div>
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.7">いずれも利用者からのご報告をもとに修正しました。ありがとうございます。</p>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔢 「日記生成最大トークン」「最大出力トークン」が再読み込みで空欄表示になる不具合を修正</strong> — 秘匿判定がキー名に TOKEN 等を含むかだけで決まっていたため、秘密情報でない数値設定までマスクされていました。判定を設定項目の<strong>型</strong>ベースに変更（APIキー・アクセストークン類は従来どおりマスクされます）</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🗑 「直前の発言を削除」でユーザー側の発言だけ画面に残る不具合を修正</strong> — タイピング表示が内部的にAI発言と同じ扱いで常に末尾にあるため、消す対象がずれていました。削除後にタイピング表示が出なくなる副作用も解消</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔊 自動読み上げが無音で終わる不具合を修正</strong> — 同じ原因で読み上げ対象がタイピング表示になり、本文を取得できていませんでした</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.26.1 -->
   <div class="version-block">
     <div class="version-header">
