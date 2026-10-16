@@ -58,6 +58,25 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.26.3 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.26.3</span>
+      <span class="version-date">2026-10-16</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🤖【重要】AI自身の記憶が膨張して更新が止まる不具合を修正</div>
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.7">v1.26.1 で長期記憶（あなたについての記憶）の停止は直りましたが、<strong>AI自身の記憶だけが別の原因で止まる</strong>ケースが残っていました。アップデートで自動的に復旧します。</p>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🤖【重要】AI自身の記憶に整理の指示がなく、無制限に膨張していた問題を修正</strong> — 「あなたについての記憶」側にはあった「重複は統合する」「件数・文字数の上限」が、AI自身の記憶側には一切なく「維持・更新・拡張」だけを指示していました。重複の統合と各セクションの上限を追加しました</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🤖 AI自身の記憶を書き直す際の入力サイズに上限を設定</strong> — 日記は8000文字で区切る一方、既存のAI記憶は長さ無制限で渡していました</li>
+        <li><span class="badge badge-feat">feat</span> <strong>🔄 記憶の整理に失敗した場合、Gemini で1回だけ再試行</strong> — 日記生成には以前から入っていた仕組みです。コード特化モデルを選んでいると長文の再生成を諦めることがあり、従来はそこで静かに止まっていました</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔧 健全性チェックに、意図的な整理と事故を区別する判定を追加</strong> — 「統合して縮めなさい」と指示しているのに「半分未満なら破棄」では、指示と判定が打ち消し合っていました</li>
+      </ul>
+      <p style="margin:10px 0 0;font-size:13px;line-height:1.7;opacity:.85">補足：「🧠 記憶を整理」は「あなたについての記憶」のみを更新します。AI自身の記憶は日記と同時に更新されるため、急ぐ場合は「📔 日記を生成」を実行してください。</p>
+    </div>
+  </div>
+
   <!-- v1.26.2 -->
   <div class="version-block">
     <div class="version-header">
