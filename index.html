@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.26.4 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.26.4</span>
+      <span class="version-date">2026-10-16</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🧩【重要】記憶が上限を超えると「会話の好み」が AI に届かなくなる不具合を修正</div>
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.7">記憶が注入上限（既定4,096文字）を超えている場合、<strong>保存されているのに AI に渡っていない部分</strong>がありました。切り捨てられるのは、プロンプトが「常に参照」と指示している層からでした。</p>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🧩 記憶の注入を「保存順の先頭から切る」方式から「層ごとの予算配分」方式に変更</strong> — 従来は上限超過時に末尾から切られるため、手続き記憶（会話の好み・反応パターン）が真っ先に失われていました。保存7,685文字／上限4,096文字の環境で手続き記憶が1行も渡っていない実例がありました</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🧩 上限に収まっている場合は一切加工しません</strong> — 記憶が小さい環境では従来と同じ動作です。見出しのない記憶（旧フォーマット・手編集）も従来どおりの処理にフォールバックします</li>
+      </ul>
+      <p style="margin:10px 0 0;font-size:13px;line-height:1.7;opacity:.85">補足：「長期記憶」→「記憶を確認・修正」で「保存◯◯文字 / 応答時は最大◯◯文字まで参照」と出ている場合、保存のほうが大きければ今回の修正の対象です。</p>
+    </div>
+  </div>
+
   <!-- v1.26.3 -->
   <div class="version-block">
     <div class="version-header">
