@@ -58,6 +58,23 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.26.5 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.26.5</span>
+      <span class="version-date">2026-11-13</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">💬【重要】AIの返事の冒頭が消える不具合を修正</div>
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.7">利用者からのご指摘をもとにコードを精査し、3件を修正しました。</p>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>💬【重要】「LINE」「API」など英単語で始まる返事の冒頭が削られていた不具合を修正</strong> — 思考過程（英語）を取り除く処理が通常の返事にも反応していました。例：「LINEで送ってね」→「で送ってね」、「Geminiのモデルを変えたのね」→「のモデルを変えたのね」。判別条件を見直し、短い英単語の前置きは本文として残します</li>
+        <li><span class="badge badge-fix">fix</span> <strong>💬 一時セッションで過去のやりとりがAIに渡っていなかった不具合を修正</strong> — 2ターン目以降、会話が「undefined」として渡っていました。内部の項目名の食い違いが原因です</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔒 キャラアイコンのアップロードにアクセストークン検証が抜けていた問題を修正</strong> — WebUIトークンを有効にしていても exec URL を知っていれば画像を書き込める状態でした</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.26.4 -->
   <div class="version-block">
     <div class="version-header">
