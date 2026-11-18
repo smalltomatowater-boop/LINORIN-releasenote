@@ -58,6 +58,51 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.26.6 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.26.6</span>
+      <span class="version-date">2026-11-18</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">🆕 さくらのAIクラウドに新モデル2種を追加</div>
+      <ul>
+        <li><span class="badge badge-new">new</span> <strong>🆕 <code>preview/GLM-5.3-Flash</code> と <code>preview/DeepSeek-V4.1-Flash-1017</code> を追加</strong> — さくらインターネットのパブリックプレビュー提供開始にあわせて追加。どちらもマルチモーダル（画像の理解が可能）です。「🔄 モデル更新」を押すと選択肢に現れます</li>
+        <li><span class="badge badge-new">new</span> <strong>🖼️ 上記2モデルを画像送信の対応モデルとして登録</strong> — 画像を送っても Gemini に迂回せず処理できます。ただし<strong>さくら経由の画像送信は既定でオフ</strong>のままです</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🗑️ <code>preview/Kimi-K2.6</code> を選択肢から削除</strong> — 提供終了（EOL）のため。すでに選んでいる方の設定は消えません</li>
+      </ul>
+      <div class="section-title">🛟【重要】モデルの提供終了で設定が消える不具合を修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🛟【重要】保存済みのモデル名が選択肢から消えると、保存時に設定が空になる不具合を修正</strong> — AI提供元がモデルを廃止すると選択肢から消え、プルダウンが未選択状態になり、<strong>そのまま保存すると「モデル未設定」で上書きされ応答しなくなる</strong>可能性がありました。選択肢に無い保存値は「（現在の設定値・提供終了の可能性あり）」として残します。すべてのモデル選択欄が対象です</li>
+      </ul>
+      <div class="section-title">📩【重要】LINEの受信処理が止まりうる不具合を修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>📩【重要】壊れたデータが1件混ざると、LINEの受信処理が毎分まるごと中断していた不具合を修正</strong> — 3回目で破棄する処理自体が例外を起こし、破棄もされず中断していました。壊れたデータが毎分残り続け、<strong>並び順でその後ろにある正常なメッセージも処理されない</strong>状態になり得ました（自己テストで検出）</li>
+      </ul>
+      <div class="section-title">🧠【重要】「推論モード」のトグルが動いていなかった問題を修正</div>
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.7">設定画面に6つある「推論モード」のうち、<strong>3つはオンにしても何も起きず</strong>、1つは<strong>AIの思考が返事に混ざる</strong>状態でした。</p>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🧠【重要】Anthropic / OpenRouter / OpenAI の推論モードが未実装だった問題を修正</strong> — トグルは表示されていましたが、<strong>オンにしてもAPIへの送信内容が1バイトも変わりませんでした</strong>。Anthropic は extended thinking（思考予算を新設の設定項目で指定・返答用の上限に上乗せ）、OpenRouter は reasoning（effort=high）、OpenAI は reasoning_effort=high を送るようにしました。非対応モデルでは自動的に推論なしで1回だけ引き直すので、オンのままでも壊れません</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🧠【重要】Gemini の推論モードで、AIの思考が返事に混ざっていた問題を修正</strong> — 思考を取得する設定を送っていたのに、思考部分と返答部分を区別せず連結していました</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🧠 Gemini の推論モードが、実際に使われているモデルで一度も発動していなかった問題を修正</strong> — モデル名に「thinking」が含まれるかで判定していましたが、Gemini 2.5 以降は名前に含まないまま推論に対応しています</li>
+        <li><span class="badge badge-change">note</span> <strong>💰 思考分は出力トークンとして課金されます</strong> — 各トグルの説明に明記しました。精度を上げたいときだけオンにしてください</li>
+      </ul>
+      <div class="section-title">🧩【重要】設定画面の「クイックコマンド」が開けなかった問題を修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🧩【重要】クイックコマンドの設定が、どのタブにも表示されていなかった問題を修正</strong> — 振り分け先が<strong>存在しないタブ</strong>を指していたため、設定自体は作られているのに画面のどこからも到達できませんでした。「外観」タブに表示します</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🧩 バッジや「設定へジャンプ」が別のタブを開いていた問題を修正</strong> — 振り分け表が二重管理になっていて実際の配置とズレており、メール通知・画像生成・音声AI・バックアップが対象でした。表を1つに統合し、ズレが起きない形にしました</li>
+      </ul>
+      <div class="section-title">🖌️ そのほかの修正</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🖌️ テーマで指定した文字色が、ブラウザチャットに反映されていなかった問題を修正</strong> — 配色のうち文字色だけが画面側に渡っていませんでした</li>
+        <li><span class="badge badge-fix">fix</span> <strong>💬 ブラウザチャットの「追加インストラクション」が、どこにも使われていなかった問題を修正</strong> — 保存先が実際に読み込まれるキーと違っており、<strong>入力してもAIに渡っていませんでした</strong>。あわせて、保存しても最大1時間反映されない問題も直しています。以前に入力した内容は、画面を開いたときに引き継ぎ案内が出ます</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🖼️ LINEへの画像送信が失敗しうる問題を修正</strong> — 画像URLの形式が古く、画像データではなく確認ページが返ることがありました</li>
+        <li><span class="badge badge-new">new</span> <strong>⌨️ ブラウザチャットで Ctrl+Enter（Mac は Cmd+Enter）で送信できるようにしました</strong> — Enter 単独は従来どおり改行です。日本語入力の変換確定で誤送信しないようにしています</li>
+        <li><span class="badge badge-fix">fix</span> <strong>📋 設定画面の「システムフィールドの合成順」の説明が、実装と食い違っていたのを修正</strong> — SYSTEM_PROMPT は実際には先頭に入りますが「3番目」と書かれており、記憶の上限値も古い値のままでした</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.26.5 -->
   <div class="version-block">
     <div class="version-header">
