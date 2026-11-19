@@ -58,6 +58,42 @@ code{
     <p>Linked Intelligence Network Orchestrator</p>
   </header>
 
+  <!-- v1.26.7 -->
+  <div class="version-block">
+    <div class="version-header">
+      <span class="version-num">v1.26.7</span>
+      <span class="version-date">2026-11-19</span>
+    </div>
+    <div class="version-body">
+      <div class="section-title">📵【最重要】LINEの返事が届かないことがある問題を修正</div>
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.7"><strong>受信は正常で、LINEへの送信が 400 で失敗</strong>していました。400 は再送しても通らないため、返事がそのまま消えます。短い返事だけ届くので「不安定」に見えます。</p>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>📵【最重要】返事が長いとLINEに届かず消えていた問題を修正</strong> — LINEのテキストは1通5000文字までで、超えると送信全体が失敗します。<strong>送信前の長さチェックがどこにも無く</strong>（Telegramは4000文字で分割済みだったのに、LINE側だけ無かった）、長い返事は丸ごと消えていました。4800文字ごとに分割して送ります（1回の上限5通、超過分は末尾に「…」）</li>
+        <li><span class="badge badge-fix">fix</span> <strong>📵【重要】返事が空のときも失敗していた問題を修正</strong> — LINEは空文字を受け付けません。整形の結果が空になった場合、無言で消える代わりに「うまく言葉にできなかった」と送ります</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🧠【重要】推論モデルの思考が返事に混ざって肥大する問題を修正</strong> — GLM系・Kimi系（さくらの <code>preview/GLM-5.3-Flash</code> など）は思考を <code>&lt;think&gt;…&lt;/think&gt;</code>（または <code>◁think▷…◁/think▷</code>）として本文に入れて返します。これを取り除いていなかったため本文が膨らみ、上記の5000文字超過を引き起こしていました。出力が途中で切れて閉じタグが無い場合も除去します</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🌸 さくらのAIクラウドで推論モデルの返事が空になることがある問題を修正</strong> — 他のエンジン（DeepSeek / GLM / OpenRouter）は本文が空のとき <code>reasoning_content</code> を拾うのに、さくらだけ見ていませんでした</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🩺 LINE送信の失敗理由がログに残らない問題を修正</strong> — これまで <code>code:400</code> だけが記録され、理由はGAS側のログにしか出ていませんでした</li>
+      </ul>
+      <div class="section-title">🧹 内部データの掃除と容量監視</div>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🧹【重要】使われていない診断用キーが800件たまって容量を食っていた問題を修正</strong> — ずっと前に削除されたデバッグ処理の書き込み先が残り、<strong>799件・180KB</strong>（スクリプトプロパティ全体500KBの36%）を占めていました。この領域が溢れると受信の一時保存が失敗して<strong>受信が全滅する</strong>ため、掃除対象に追加しました（実環境で 1108件→309件 / 40%→4%）</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🩺 ヘルスチェックが容量を見ていなかった問題を修正</strong> — 読み取りが1回できるかだけを見ており、<strong>1108件たまっていても「正常」と表示していました</strong>。使用量を表示し、50%超で警告・80%超で異常にします</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🩺 自己診断の容量警報が構造的に誤報していた問題を修正</strong> — 重複検知用のキー（自動削除される正常な値）だけで閾値を超えるため常に警報が出ていました。判定を実際の制約であるバイト数基準に変更しました</li>
+        <li><span class="badge badge-new">new</span> <strong>🧹 診断URLから掃除を実行できるようにしました</strong>（<code>?target=sweep-props</code>）</li>
+        <li><span class="badge badge-new">new</span> <strong>🩺 診断URLから「デバッグログ」と「スクリプトプロパティの内訳」を見られるようにしました</strong> — 今回の調査で、決定的な証拠を読む手段がブラウザUIからしか無く切り分けが遅れたため</li>
+      </ul>
+      <div class="section-title">🔔【重要】「今すぐ話しかけて」が効かないことがある問題を修正</div>
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.7">自発プッシュを強制するフラグが、別の処理に消費されてしまっていました。</p>
+      <ul>
+        <li><span class="badge badge-fix">fix</span> <strong>🔔【重要】強制プッシュのフラグが「キューの即返信」に消費されて、プッシュが来なくなる問題を修正</strong> — 内部では1つのフラグに「いますぐ話しかける」と「待機中のメッセージにすぐ返信する」の<strong>2つの意味</strong>が同居していました。毎分の処理はキュー処理を先に走らせるため、<strong>会話中（キューにメッセージがある状態）に強制プッシュを立てると、必ず返信側がフラグを消費してプッシュが発火しません</strong>。消費後は通常判定に戻るため「沈黙◯分未満」でブロックされ、何も起きずに終わります。ふたつの意味を別々の仕組みに分離しました</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔔【重要】強制プッシュが「一度も会話していない状態」では無視されていた問題を修正</strong> — 強制フラグは沈黙時間や1日の上限を無視して発火する設計ですが、その手前に「最終対話時刻が未設定なら中断」という判定があり、初回セットアップ直後は効きませんでした</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🔔 返信待ちのときに強制プッシュが無言で消えていた問題を修正</strong> — キューに待機中のメッセージが1件でもあると、強制指定でもプッシュを見送っていました。理由もログに残らないため気づけませんでした</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🧹「今すぐ話しかける」ボタンが、許可していないユーザーにもフラグを立てていた問題を修正</strong> — 許可外のユーザーは判定前に除外されるためフラグが消費されず、<strong>TRUE のまま永久に残り続けます</strong>。対象を利用許可ユーザーのみに絞り、対象がいない場合はその旨を表示します</li>
+        <li><span class="badge badge-fix">fix</span> <strong>🩺「プッシュが来ない」診断が、強制フラグを見ずに誤った理由を表示していた問題を修正</strong> — フラグが立っていても「沈黙閾値未満でブロック」と報告していました。診断に強制フラグの状態を表示します</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- v1.26.6 -->
   <div class="version-block">
     <div class="version-header">
